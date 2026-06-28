@@ -279,6 +279,8 @@
     const gauge = document.querySelector("[data-pkv-gauge]");
     const progress = document.querySelector("[data-pkv-progress]");
     const relevance = document.querySelector("[data-pkv-relevance]");
+    const eligibility = document.querySelector("[data-pkv-eligibility]");
+    const saving = document.querySelector("[data-pkv-saving]");
     const title = document.querySelector("[data-pkv-title]");
     const text = document.querySelector("[data-pkv-text]");
     if (!form || !output || !scoreValue || !gauge || !progress || !relevance || !title || !text) return;
@@ -287,26 +289,18 @@
       const age = Number(form.querySelector('[data-pkv="age"]')?.value || 0);
       const status = form.querySelector('[data-pkv="status"]')?.value || "";
       const income = Number(form.querySelector('[data-pkv="income"]')?.value || 0);
-      const family = form.querySelector('[data-pkv="family"]')?.value || "";
       let score = 0;
 
-      if (["Selbstständig", "Unternehmer", "Beamter"].includes(status)) score += 35;
-
-      if (income < 4500) score += 5;
-      else if (income <= 5500) score += 15;
-      else if (income <= 6500) score += 25;
-      else score += 30;
-
-      if (age <= 30) score += 25;
-      else if (age <= 40) score += 20;
-      else if (age <= 50) score += 10;
-      else score += 5;
-
-      if (family === "Ledig") score += 10;
-      else if (family === "Verheiratet ohne Kinder") score += 5;
-
-      if (status === "Angestellt" && income <= 6500) {
-        score = Math.min(score, 35);
+      if (age >= 60) {
+        score = 0;
+      } else if (age >= 55) {
+        score = 15;
+      } else if (status === "Angestellt") {
+        if (income < 6250) score = 0;
+        else if (income >= 7000) score = 100;
+        else score = age >= 40 ? 70 : 80;
+      } else if (["Selbstständig", "Unternehmer"].includes(status)) {
+        score = 30;
       }
 
       score = clamp(score, 0, 100);
@@ -327,6 +321,22 @@
         relevance.textContent = "PKV-Relevanz: hoch";
         title.textContent = "Hohe Relevanz für eine PKV-Potenzialanalyse";
         text.textContent = "Deine Angaben sprechen dafür, dass eine professionelle PKV-Analyse besonders relevant sein könnte. Wichtig ist eine langfristige Betrachtung statt nur ein Beitragsvergleich.";
+      }
+
+      if (eligibility) {
+        eligibility.textContent = status === "Angestellt" && income < 6250 && age < 55
+          ? "Bei Angestellten ist ein Wechsel unter 6.250 € Bruttoeinkommen monatlich in der Regel nicht möglich."
+          : "";
+      }
+
+      if (saving) {
+        if (["Selbstständig", "Unternehmer"].includes(status) && age < 55) {
+          saving.textContent = "Highlight: Bei Selbstständigen und Unternehmern kann je nach Situation ein mögliches Einsparpotenzial von ca. 9.000-11.000 € pro Jahr bestehen.";
+        } else if (status === "Angestellt" && income >= 6250 && age < 55) {
+          saving.textContent = "Highlight: Bei Angestellten kann je nach Situation ein mögliches Einsparpotenzial von ca. 3.000-5.000 € pro Jahr bestehen.";
+        } else {
+          saving.textContent = "Eine genaue Einschätzung ist nur nach individueller Prüfung möglich.";
+        }
       }
 
       gauge.style.setProperty("--pkv-score", String(score));
@@ -563,6 +573,25 @@
     showStep();
   };
 
+  const initLeakToggle = () => {
+    const toggle = document.querySelector("[data-leak-toggle]");
+    const system = document.querySelector("[data-leak-system]");
+    if (!toggle || !system) return;
+
+    const section = system.closest(".leak-section");
+    const setState = (isAfter) => {
+      toggle.setAttribute("aria-pressed", String(isAfter));
+      system.classList.toggle("is-after", isAfter);
+      section?.classList.toggle("leak-after", isAfter);
+    };
+
+    toggle.addEventListener("click", () => {
+      setState(toggle.getAttribute("aria-pressed") !== "true");
+    });
+
+    setState(false);
+  };
+
   const initImageFallbacks = () => {
     document.querySelectorAll("img").forEach((image) => {
       image.addEventListener("error", () => {
@@ -594,6 +623,7 @@
     initVideoModal();
     initCompass();
     initFunnel();
+    initLeakToggle();
     initImageFallbacks();
     initEscapeToClose();
   });
