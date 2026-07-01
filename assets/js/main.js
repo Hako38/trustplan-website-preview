@@ -80,6 +80,197 @@
     revealItems.forEach((item) => observer.observe(item));
   };
 
+  const initHeadingAnimations = () => {
+    const main = document.querySelector("main");
+    if (!main) return;
+    const legalPage = /\/(impressum|datenschutz|danke|404)\.html$/i.test(window.location.pathname);
+    if (legalPage) return;
+
+    const normalize = (text) => text.replace(/\s+/g, " ").trim();
+    const splitWords = (text) =>
+      normalize(text)
+        .split(" ")
+        .map((word) => `<span class="title-word">${word}</span>`)
+        .join(" ");
+    const setAnimatedHTML = (element, html, variant) => {
+      if (!element || element.dataset.headingAnimated === "true") return;
+      element.dataset.headingAnimated = "true";
+      element.classList.add("title-anim", `title-${variant}`);
+      element.innerHTML = html;
+      element.querySelectorAll(".title-word").forEach((word, index) => {
+        word.style.transitionDelay = `${70 + index * 70}ms`;
+      });
+    };
+
+    const heroTitle = document.querySelector(".hero h1");
+    const heroTitleText = normalize(heroTitle?.textContent || "").replace("Strukturstatt", "Struktur statt");
+    if (heroTitleText === "Endlich Struktur statt Verlust.") {
+      setAnimatedHTML(
+        heroTitle,
+        '<span class="title-word">Endlich</span> <span class="title-word title-accent title-copper title-type">Struktur</span><br><span class="title-word">statt</span> <span class="title-word title-accent title-red title-wipe">Verlust.</span>',
+        "hero"
+      );
+    }
+
+    main.querySelectorAll("h1").forEach((heading) => {
+      if (heading.classList.contains("title-anim")) return;
+      setAnimatedHTML(heading, splitWords(heading.textContent), "page");
+    });
+
+    const strongHeadings = new Map([
+      [
+        "Wo dein Geld heute verloren geht",
+        {
+          variant: "blur",
+          html: 'Wo dein Geld heute <span class="title-accent title-red title-wipe">verloren</span> geht'
+        }
+      ],
+      [
+        "Warum die meisten Menschen ohne Plan durchs Leben gehen",
+        {
+          variant: "words",
+          html: '<span class="title-word">Warum</span> <span class="title-word">die</span> <span class="title-word">meisten</span> <span class="title-word">Menschen</span> <span class="title-word title-accent title-red title-type">ohne Plan</span> <span class="title-word">durchs</span> <span class="title-word">Leben</span> <span class="title-word">gehen</span>'
+        }
+      ],
+      [
+        "Die vier Bereiche, die über deine finanzielle Zukunft entscheiden",
+        {
+          variant: "mask",
+          html: 'Die vier Bereiche, die über deine <span class="title-accent title-green title-wipe">finanzielle Zukunft</span> entscheiden'
+        }
+      ],
+      [
+        "Was TrustPlan vom Markt unterscheidet",
+        {
+          variant: "depth",
+          html: 'Was <span class="title-accent title-copper">TrustPlan</span> vom Markt unterscheidet'
+        }
+      ],
+      [
+        "Für wen Trustplan besonders sinnvoll ist",
+        {
+          variant: "words",
+          html: '<span class="title-word">Für</span> <span class="title-word">wen</span> <span class="title-word">Trustplan</span> <span class="title-word title-accent title-green title-wipe">besonders sinnvoll</span> <span class="title-word">ist</span>'
+        }
+      ],
+      [
+        "Kostenlose Finanz-Tools für deine erste Orientierung",
+        {
+          variant: "glass",
+          html: 'Kostenlose Finanz-Tools für deine erste <span class="title-accent title-copper title-wipe">Orientierung</span>'
+        }
+      ],
+      [
+        "Ergebnisse echter Mandanten",
+        {
+          variant: "fade",
+          html: 'Ergebnisse <span class="title-accent title-green title-wipe">echter Mandanten</span>'
+        }
+      ],
+      [
+        "Wenn die Struktur steht, beginnt der nächste Schritt",
+        {
+          variant: "words",
+          html: '<span class="title-word">Wenn</span> <span class="title-word">die</span> <span class="title-word title-accent title-copper">Struktur</span> <span class="title-word">steht,</span> <span class="title-word">beginnt</span> <span class="title-word">der</span> <span class="title-word title-accent title-green title-wipe">nächste Schritt</span>'
+        }
+      ],
+      [
+        "Über uns",
+        {
+          variant: "glass",
+          html: "Über uns"
+        }
+      ],
+      [
+        "So läuft die Zusammenarbeit ab",
+        {
+          variant: "mask",
+          html: "So läuft die Zusammenarbeit ab"
+        }
+      ],
+      [
+        "Was kostet dich Nichtstun?",
+        {
+          variant: "urgent",
+          html: 'Was <span class="title-accent title-red title-wipe">kostet</span> dich <span class="title-accent title-red title-type">Nichtstun?</span>'
+        }
+      ],
+      [
+        "Kostenlose Potenzialanalyse starten",
+        {
+          variant: "growth",
+          html: 'Kostenlose <span class="title-accent title-green title-wipe">Potenzialanalyse</span> starten'
+        }
+      ],
+      [
+        "Häufige Fragen",
+        {
+          variant: "fade",
+          html: "Häufige Fragen"
+        }
+      ],
+      [
+        "Warte nicht, bis du jahrelang Potenzial verschenkst",
+        {
+          variant: "final",
+          html: '<span class="title-word">Warte</span> <span class="title-word">nicht,</span> <span class="title-word">bis</span> <span class="title-word">du</span> <span class="title-word">jahrelang</span> <span class="title-word title-accent title-green">Potenzial</span> <span class="title-word title-accent title-red">verschenkst</span>'
+        }
+      ]
+    ]);
+
+    main.querySelectorAll("h2").forEach((heading) => {
+      const config = strongHeadings.get(normalize(heading.textContent));
+      if (config) {
+        setAnimatedHTML(heading, config.html, config.variant);
+      }
+    });
+
+    main.querySelectorAll("h2").forEach((heading, index) => {
+      if (heading.classList.contains("title-anim")) return;
+      setAnimatedHTML(heading, splitWords(heading.textContent), index % 2 === 0 ? "mask" : "blur");
+    });
+
+    const animatedHeadings = document.querySelectorAll(".title-anim, .title-standard");
+    if (!animatedHeadings.length) return;
+
+    const showHeading = (heading) => {
+      heading.classList.add("title-visible");
+    };
+
+    const revealVisibleHeadings = () => {
+      animatedHeadings.forEach((heading) => {
+        if (heading.classList.contains("title-visible")) return;
+        const rect = heading.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.88 && rect.bottom > 0) {
+          showHeading(heading);
+        }
+      });
+    };
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      animatedHeadings.forEach(showHeading);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            showHeading(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.01, rootMargin: "0px 0px -4% 0px" }
+    );
+
+    animatedHeadings.forEach((heading) => observer.observe(heading));
+    requestAnimationFrame(revealVisibleHeadings);
+    window.addEventListener("scroll", revealVisibleHeadings, { passive: true });
+    window.addEventListener("resize", revealVisibleHeadings, { passive: true });
+  };
+
   const initCounters = () => {
     const counters = document.querySelectorAll("[data-count]");
     if (!counters.length) return;
@@ -615,6 +806,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     initHeader();
+    initHeadingAnimations();
     initReveal();
     initCounters();
     initInvestmentCalculator();
