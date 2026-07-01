@@ -115,10 +115,10 @@ h3 {
   opacity: 0;
   transform: translateY(34px) scale(0.975);
   transition:
-    opacity 1250ms ease,
-    transform 1380ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1250ms ease,
-    clip-path 1420ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1850ms ease,
+    transform 2100ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1850ms ease,
+    clip-path 2200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .title-standard {
@@ -142,9 +142,9 @@ h3 {
   transform: translateY(0.58em) scale(0.98);
   filter: blur(6px);
   transition:
-    opacity 1100ms ease,
-    transform 1260ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1100ms ease;
+    opacity 1700ms ease,
+    transform 1900ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1700ms ease;
 }
 
 .title-visible .title-word {
@@ -173,6 +173,8 @@ h3 {
   position: relative;
   display: inline-block;
   font-weight: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
 }
 
 .title-wipe::after {
@@ -206,21 +208,21 @@ h3 {
 }
 
 .title-visible .title-copper {
-  animation: liquidTitleShine 1750ms ease 320ms both;
+  animation: liquidTitleShine 2600ms ease 520ms both;
 }
 
 .title-visible .title-wipe::after {
-  animation: titleHighlightWipe 1320ms cubic-bezier(0.16, 1, 0.3, 1) 240ms both;
+  animation: titleHighlightWipe 1900ms cubic-bezier(0.16, 1, 0.3, 1) 420ms both;
 }
 
 .title-type {
-  overflow: hidden;
-  max-width: 0;
-  white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  overflow: visible;
+  white-space: normal;
 }
 
 .title-visible .title-type {
-  animation: titleTypeIn 1180ms steps(12, end) 240ms both;
+  animation: titleTypeIn 1800ms cubic-bezier(0.16, 1, 0.3, 1) 420ms both;
 }
 
 .title-hero {
@@ -322,17 +324,17 @@ h3 {
 
 @keyframes titleTypeIn {
   0% {
-    max-width: 0;
+    clip-path: inset(0 100% 0 0);
   }
   100% {
-    max-width: 18ch;
+    clip-path: inset(0 0 0 0);
   }
 }
 
 @media (max-width: 768px) {
   .title-anim {
     transform: translateY(18px);
-    transition-duration: 640ms;
+    transition-duration: 1250ms;
   }
 
   .title-standard {
@@ -343,7 +345,7 @@ h3 {
   .title-word {
     transform: translateY(0.36em);
     filter: blur(4px);
-    transition-duration: 620ms;
+    transition-duration: 1100ms;
   }
 
   .title-blur,
@@ -356,7 +358,7 @@ h3 {
   }
 
   .title-visible .title-type {
-    animation-duration: 540ms;
+    animation-duration: 1050ms;
   }
 }
 

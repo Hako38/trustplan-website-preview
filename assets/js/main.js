@@ -98,7 +98,7 @@
       element.classList.add("title-anim", `title-${variant}`);
       element.innerHTML = html;
       element.querySelectorAll(".title-word").forEach((word, index) => {
-        word.style.transitionDelay = `${70 + index * 70}ms`;
+        word.style.transitionDelay = `${180 + index * 190}ms`;
       });
     };
 
