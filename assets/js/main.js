@@ -783,6 +783,32 @@
     setState(false);
   };
 
+  const initDecisionCards = () => {
+    const cards = document.querySelectorAll(".decision-section .solid-card");
+    if (!cards.length) return;
+
+    cards.forEach((card, index) => {
+      card.style.setProperty("--decision-index", index);
+      card.setAttribute("tabindex", "0");
+    });
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      cards.forEach((card) => card.classList.add("is-active"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-active", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.42, rootMargin: "-12% 0px -18% 0px" }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+  };
+
   const initImageFallbacks = () => {
     document.querySelectorAll("img").forEach((image) => {
       image.addEventListener("error", () => {
@@ -816,6 +842,7 @@
     initCompass();
     initFunnel();
     initLeakToggle();
+    initDecisionCards();
     initImageFallbacks();
     initEscapeToClose();
   });
