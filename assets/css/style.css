@@ -1149,10 +1149,10 @@ ul {
   pointer-events: none;
   border-radius: inherit;
   background:
-    radial-gradient(circle at 0% 34%, rgba(255, 90, 103, 0.26), transparent 9%),
-    radial-gradient(circle at 100% 34%, rgba(255, 90, 103, 0.22), transparent 9%),
-    radial-gradient(circle at 0% 62%, rgba(255, 90, 103, 0.24), transparent 9%),
-    radial-gradient(circle at 100% 62%, rgba(255, 90, 103, 0.24), transparent 9%);
+    radial-gradient(circle at 0% 34%, rgba(214, 166, 79, 0.1), transparent 10%),
+    radial-gradient(circle at 100% 34%, rgba(214, 166, 79, 0.09), transparent 10%),
+    radial-gradient(circle at 0% 62%, rgba(214, 166, 79, 0.08), transparent 10%),
+    radial-gradient(circle at 100% 62%, rgba(214, 166, 79, 0.08), transparent 10%);
   opacity: 1;
   transition: opacity 520ms ease;
 }
@@ -1170,47 +1170,6 @@ ul {
 
 .leak-system.is-after .leak-vessel::after {
   opacity: 0;
-}
-
-.leak-cracks {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  opacity: 0.74;
-  transition: opacity 420ms ease, transform 520ms ease;
-}
-
-.leak-cracks span {
-  position: absolute;
-  width: 2px;
-  height: 58px;
-  background: linear-gradient(to bottom, transparent, rgba(255, 90, 103, 0.68), transparent);
-  border-radius: 999px;
-  box-shadow: 0 0 18px rgba(255, 90, 103, 0.26);
-}
-
-.leak-cracks span:nth-child(1) {
-  top: 72px;
-  left: 34px;
-  transform: rotate(-24deg);
-}
-
-.leak-cracks span:nth-child(2) {
-  top: 98px;
-  right: 42px;
-  transform: rotate(18deg);
-}
-
-.leak-cracks span:nth-child(3) {
-  bottom: 94px;
-  left: 48px;
-  transform: rotate(22deg);
-}
-
-.leak-system.is-after .leak-cracks {
-  opacity: 0;
-  transform: scale(0.96);
 }
 
 .leak-spills {
