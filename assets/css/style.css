@@ -771,6 +771,13 @@ ul {
   bottom: 14px;
   z-index: 9999;
   line-height: 1;
+  width: auto;
+  max-width: 210px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  pointer-events: auto;
 }
 
 @media (max-width: 991px) {
