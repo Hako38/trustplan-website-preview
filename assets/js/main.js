@@ -107,7 +107,7 @@
     if (heroTitleText === "Endlich Struktur statt Verlust.") {
       setAnimatedHTML(
         heroTitle,
-        '<span class="title-word">Endlich</span> <span class="title-word title-accent title-copper title-type">Struktur</span><br><span class="title-word">statt</span> <span class="title-word title-accent title-red title-wipe">Verlust.</span>',
+        '<span class="title-word">Endlich</span> <span class="title-word title-accent title-copper title-type">Struktur</span><br><span class="title-word">statt</span> <span class="title-word title-accent title-neutral title-wipe">Verlust.</span>',
         "hero"
       );
     }
@@ -122,21 +122,21 @@
         "Wo dein Geld heute verloren geht",
         {
           variant: "blur",
-          html: 'Wo dein Geld heute <span class="title-accent title-red title-wipe">verloren</span> geht'
+          html: 'Wo dein Geld heute <span class="title-accent title-neutral title-wipe">verloren</span> geht'
         }
       ],
       [
         "Warum die meisten Menschen ohne Plan durchs Leben gehen",
         {
           variant: "words",
-          html: '<span class="title-word">Warum</span> <span class="title-word">die</span> <span class="title-word">meisten</span> <span class="title-word">Menschen</span> <span class="title-word title-accent title-red title-type">ohne Plan</span> <span class="title-word">durchs</span> <span class="title-word">Leben</span> <span class="title-word">gehen</span>'
+          html: '<span class="title-word">Warum</span> <span class="title-word">die</span> <span class="title-word">meisten</span> <span class="title-word">Menschen</span> <span class="title-word title-accent title-neutral title-type">ohne Plan</span> <span class="title-word">durchs</span> <span class="title-word">Leben</span> <span class="title-word">gehen</span>'
         }
       ],
       [
         "Die vier Bereiche, die über deine finanzielle Zukunft entscheiden",
         {
           variant: "mask",
-          html: 'Die vier Bereiche, die über deine <span class="title-accent title-green title-wipe">finanzielle Zukunft</span> entscheiden'
+          html: 'Die vier Bereiche, die über deine <span class="title-accent title-neutral title-wipe">finanzielle Zukunft</span> entscheiden'
         }
       ],
       [
@@ -150,7 +150,7 @@
         "Für wen Trustplan besonders sinnvoll ist",
         {
           variant: "words",
-          html: '<span class="title-word">Für</span> <span class="title-word">wen</span> <span class="title-word">Trustplan</span> <span class="title-word title-accent title-green title-wipe">besonders sinnvoll</span> <span class="title-word">ist</span>'
+          html: '<span class="title-word">Für</span> <span class="title-word">wen</span> <span class="title-word">Trustplan</span> <span class="title-word title-accent title-neutral title-wipe">besonders sinnvoll</span> <span class="title-word">ist</span>'
         }
       ],
       [
@@ -164,14 +164,14 @@
         "Ergebnisse echter Mandanten",
         {
           variant: "fade",
-          html: 'Ergebnisse <span class="title-accent title-green title-wipe">echter Mandanten</span>'
+          html: 'Ergebnisse <span class="title-accent title-neutral title-wipe">echter Mandanten</span>'
         }
       ],
       [
         "Wenn die Struktur steht, beginnt der nächste Schritt",
         {
           variant: "words",
-          html: '<span class="title-word">Wenn</span> <span class="title-word">die</span> <span class="title-word title-accent title-copper">Struktur</span> <span class="title-word">steht,</span> <span class="title-word">beginnt</span> <span class="title-word">der</span> <span class="title-word title-accent title-green title-wipe">nächste Schritt</span>'
+          html: '<span class="title-word">Wenn</span> <span class="title-word">die</span> <span class="title-word title-accent title-copper">Struktur</span> <span class="title-word">steht,</span> <span class="title-word">beginnt</span> <span class="title-word">der</span> <span class="title-word title-accent title-neutral title-wipe">nächste Schritt</span>'
         }
       ],
       [
@@ -192,14 +192,14 @@
         "Was kostet dich Nichtstun?",
         {
           variant: "urgent",
-          html: 'Was <span class="title-accent title-red title-wipe">kostet</span> dich <span class="title-accent title-red title-type">Nichtstun?</span>'
+          html: 'Was <span class="title-accent title-neutral title-wipe">kostet</span> dich <span class="title-accent title-neutral title-type">Nichtstun?</span>'
         }
       ],
       [
         "Kostenlose Potenzialanalyse starten",
         {
           variant: "growth",
-          html: 'Kostenlose <span class="title-accent title-green title-wipe">Potenzialanalyse</span> starten'
+          html: 'Kostenlose <span class="title-accent title-neutral title-wipe">Potenzialanalyse</span> starten'
         }
       ],
       [
@@ -213,7 +213,7 @@
         "Warte nicht, bis du jahrelang Potenzial verschenkst",
         {
           variant: "final",
-          html: '<span class="title-word">Warte</span> <span class="title-word">nicht,</span> <span class="title-word">bis</span> <span class="title-word">du</span> <span class="title-word">jahrelang</span> <span class="title-word title-accent title-green">Potenzial</span> <span class="title-word title-accent title-red">verschenkst</span>'
+          html: '<span class="title-word">Warte</span> <span class="title-word">nicht,</span> <span class="title-word">bis</span> <span class="title-word">du</span> <span class="title-word">jahrelang</span> <span class="title-word title-accent title-neutral">Potenzial</span> <span class="title-word title-accent title-neutral">verschenkst</span>'
         }
       ]
     ]);

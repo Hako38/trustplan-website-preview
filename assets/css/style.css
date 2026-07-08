@@ -207,6 +207,10 @@ h3 {
   color: #3aa879;
 }
 
+.title-neutral {
+  color: inherit;
+}
+
 .title-visible .title-copper {
   animation: liquidTitleShine 2600ms ease 520ms both;
 }
