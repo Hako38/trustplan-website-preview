@@ -684,6 +684,11 @@ ul {
   color: var(--white);
 }
 
+.trust-badges .trust-badge-wide {
+  min-width: min(100%, 320px);
+  justify-content: center;
+}
+
 .provenexpert-widget {
   display: flex;
   flex-wrap: wrap;
@@ -4393,7 +4398,7 @@ details p {
 
   .hero .trust-badges {
     width: 100%;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     gap: 8px;
   }
 
