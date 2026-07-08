@@ -763,6 +763,24 @@ ul {
   transform: translateY(-2px);
 }
 
+.proseal-widget {
+  position: fixed;
+  right: 14px;
+  top: 96px;
+  z-index: 9999;
+  line-height: 1;
+}
+
+@media (max-width: 991px) {
+  .proseal-widget {
+    right: 10px;
+    top: auto;
+    bottom: 12px;
+    transform: scale(0.82);
+    transform-origin: bottom right;
+  }
+}
+
 .hero-disclaimer {
   max-width: 720px;
   margin: 1rem auto 0;
