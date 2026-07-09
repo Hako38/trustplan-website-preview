@@ -189,13 +189,6 @@
         }
       ],
       [
-        "Was kostet dich Nichtstun?",
-        {
-          variant: "urgent",
-          html: 'Was <span class="title-accent title-neutral title-wipe">kostet</span> dich <span class="title-accent title-neutral title-type">Nichtstun?</span>'
-        }
-      ],
-      [
         "Kostenlose Potenzialanalyse starten",
         {
           variant: "growth",

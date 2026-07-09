@@ -5316,8 +5316,7 @@ select:focus {
 }
 
 /* Strategy upgrade components */
-.audience-section,
-.inaction-section {
+.audience-section {
   overflow: hidden;
   background:
     radial-gradient(circle at 14% 12%, rgba(196, 122, 63, 0.11), transparent 26rem),
@@ -5325,8 +5324,7 @@ select:focus {
     linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(240, 246, 253, 0.92) 58%, rgba(250, 252, 255, 0.98));
 }
 
-.audience-card,
-.inaction-card {
+.audience-card {
   position: relative;
   overflow: hidden;
   background:
@@ -5337,8 +5335,7 @@ select:focus {
   backdrop-filter: blur(22px) saturate(145%);
 }
 
-.audience-card::after,
-.inaction-card::after {
+.audience-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -5347,8 +5344,7 @@ select:focus {
   opacity: 0.34;
 }
 
-.audience-card,
-.inaction-card {
+.audience-card {
   padding: 26px;
 }
 
@@ -5399,41 +5395,6 @@ select:focus {
   box-shadow: 0 0 16px rgba(159, 90, 42, 0.3);
 }
 
-.inaction-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.inaction-card {
-  text-align: center;
-}
-
-.inaction-card strong {
-  display: block;
-  color: var(--navy-950);
-  font-size: clamp(2.2rem, 4.8vw, 4rem);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.inaction-card > span {
-  display: block;
-  color: var(--orange);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.78rem;
-  margin-bottom: 16px;
-}
-
-.inaction-card p {
-  color: var(--muted);
-  font-size: 1.1rem;
-  font-weight: 800;
-  margin-bottom: 0;
-}
-
 .center-action {
   display: flex;
   justify-content: center;
@@ -5441,10 +5402,6 @@ select:focus {
 }
 
 @media (max-width: 768px) {
-  .inaction-grid {
-    grid-template-columns: 1fr;
-  }
-
   .center-action .btn {
     width: 100%;
   }
