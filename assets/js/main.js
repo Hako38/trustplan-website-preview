@@ -809,6 +809,31 @@
     cards.forEach((card) => observer.observe(card));
   };
 
+  const initRealEstateVisual = () => {
+    const visual = document.querySelector("[data-real-estate-visual]");
+    if (!visual || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let ticking = false;
+    const update = () => {
+      const rect = visual.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const progress = clamp((viewport - rect.top) / (viewport + rect.height), 0, 1);
+      const shift = (progress - 0.5) * 2;
+      visual.style.setProperty("--estate-shift", shift.toFixed(3));
+      ticking = false;
+    };
+
+    const requestUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate, { passive: true });
+  };
+
   const initImageFallbacks = () => {
     document.querySelectorAll("img").forEach((image) => {
       image.addEventListener("error", () => {
@@ -843,6 +868,7 @@
     initFunnel();
     initLeakToggle();
     initDecisionCards();
+    initRealEstateVisual();
     initImageFallbacks();
     initEscapeToClose();
   });

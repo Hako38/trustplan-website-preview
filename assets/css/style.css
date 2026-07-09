@@ -2336,6 +2336,319 @@ ul {
   pointer-events: none;
 }
 
+.real-estate-section {
+  overflow: hidden;
+}
+
+.real-estate-visual {
+  --estate-shift: 0;
+  isolation: isolate;
+  max-width: min(100%, 1080px);
+  overflow: visible;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(196, 122, 63, 0.22), transparent 28%),
+    radial-gradient(circle at 84% 18%, rgba(18, 52, 95, 0.2), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(228, 238, 252, 0.62));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    0 34px 90px rgba(7, 24, 47, 0.16),
+    0 0 0 1px rgba(255, 255, 255, 0.44);
+}
+
+.real-estate-visual::before {
+  content: "";
+  position: absolute;
+  inset: -34px;
+  z-index: -1;
+  border-radius: 44px;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(196, 122, 63, 0.2), transparent 28%),
+    radial-gradient(circle at 78% 76%, rgba(18, 52, 95, 0.16), transparent 34%);
+  filter: blur(18px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.real-estate-visual::after {
+  z-index: 2;
+  border-radius: inherit;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.34), transparent 31%, rgba(255, 255, 255, 0.18) 62%, transparent),
+    radial-gradient(circle at 75% 18%, rgba(196, 122, 63, 0.18), transparent 25%),
+    linear-gradient(180deg, rgba(7, 24, 47, 0.02), rgba(7, 24, 47, 0.34));
+}
+
+.real-estate-visual img {
+  position: relative;
+  z-index: 1;
+  height: clamp(280px, 39vw, 470px);
+  border-radius: 30px;
+  filter: saturate(0.96) contrast(1.05) brightness(0.92);
+  transform: scale(1.012);
+}
+
+.estate-blueprint {
+  position: absolute;
+  right: 6%;
+  bottom: 9%;
+  z-index: 3;
+  width: min(34%, 320px);
+  aspect-ratio: 1.32;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  border-radius: 22px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(18, 52, 95, 0.42), rgba(196, 122, 63, 0.18));
+  background-size: 22px 22px, 22px 22px, 100% 100%;
+  box-shadow: 0 22px 54px rgba(7, 24, 47, 0.18);
+  opacity: 0.76;
+  transform: translate3d(0, calc(var(--estate-shift) * -10px), 0) rotate(-3deg);
+  transition: transform 600ms ease, opacity 300ms ease;
+  pointer-events: none;
+}
+
+.estate-blueprint::before,
+.estate-blueprint::after {
+  content: "";
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.52);
+  border-radius: 8px;
+}
+
+.estate-blueprint::before {
+  inset: 22% 18% 28% 16%;
+}
+
+.estate-blueprint::after {
+  right: 16%;
+  bottom: 18%;
+  width: 28%;
+  height: 26%;
+  border-left: 0;
+}
+
+.estate-floating,
+.estate-kpi {
+  position: absolute;
+  z-index: 5;
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.74), rgba(238, 245, 255, 0.48));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.74),
+    0 20px 52px rgba(7, 24, 47, 0.17);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.estate-floating {
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  border-radius: 24px;
+  color: var(--navy);
+  font-size: 34px;
+  font-weight: 900;
+  transform: translate3d(0, calc(var(--estate-shift) * -14px), 0);
+  animation: estateFloat 7.5s ease-in-out infinite;
+}
+
+.estate-floating::before {
+  content: attr(data-icon);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(196, 122, 63, 0.95), rgba(159, 90, 42, 0.9));
+  color: #fff;
+  box-shadow: 0 14px 32px rgba(159, 90, 42, 0.24);
+}
+
+.estate-floating-house {
+  left: 6%;
+  top: 13%;
+}
+
+.estate-floating-value {
+  right: 10%;
+  top: 12%;
+  animation-delay: -1.7s;
+}
+
+.estate-floating-growth {
+  right: 18%;
+  bottom: 16%;
+  animation-delay: -3.2s;
+}
+
+.estate-kpi {
+  min-width: 188px;
+  padding: 13px 15px;
+  border-radius: 20px;
+  color: var(--navy);
+  transform: translate3d(0, calc(var(--estate-shift) * -8px), 0);
+  animation: estateFloat 8.4s ease-in-out infinite;
+}
+
+.estate-kpi strong,
+.estate-kpi small {
+  display: block;
+}
+
+.estate-kpi strong {
+  font-size: 0.96rem;
+  letter-spacing: -0.01em;
+}
+
+.estate-kpi small {
+  margin-top: 3px;
+  color: rgba(7, 24, 47, 0.62);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.estate-kpi-one {
+  left: 6%;
+  bottom: 31%;
+  animation-delay: -2.3s;
+}
+
+.estate-kpi-two {
+  right: 4%;
+  top: 28%;
+  animation-delay: -4.1s;
+}
+
+.estate-kpi-three {
+  left: 39%;
+  bottom: 6%;
+  animation-delay: -5.4s;
+}
+
+.real-estate-visual:hover .estate-floating,
+.real-estate-visual:hover .estate-kpi {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 26px 66px rgba(7, 24, 47, 0.2);
+}
+
+@keyframes estateFloat {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -10px;
+  }
+}
+
+@media (max-width: 992px) {
+  .real-estate-visual {
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 28px;
+  }
+
+  .real-estate-visual img {
+    height: clamp(280px, 48vw, 390px);
+    border-radius: 26px;
+  }
+
+  .estate-floating {
+    width: 62px;
+    height: 62px;
+    border-radius: 20px;
+    font-size: 28px;
+  }
+
+  .estate-floating::before {
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
+  }
+
+  .estate-kpi {
+    min-width: 164px;
+    padding: 11px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .real-estate-visual {
+    margin-bottom: 22px;
+  }
+
+  .real-estate-visual::before {
+    inset: -18px;
+    filter: blur(14px);
+  }
+
+  .real-estate-visual img {
+    height: 320px;
+    object-position: 46% 50%;
+  }
+
+  .estate-blueprint,
+  .estate-floating-value,
+  .estate-floating-growth,
+  .estate-kpi-three {
+    display: none;
+  }
+
+  .estate-floating-house {
+    left: 14px;
+    top: 14px;
+  }
+
+  .estate-kpi-one {
+    left: 14px;
+    right: auto;
+    bottom: 14px;
+    max-width: calc(100% - 28px);
+  }
+
+  .estate-kpi-two {
+    top: 14px;
+    right: 14px;
+    max-width: calc(100% - 96px);
+  }
+
+  .estate-kpi strong {
+    font-size: 0.86rem;
+  }
+
+  .estate-kpi small {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .real-estate-visual img {
+    height: 292px;
+  }
+
+  .estate-floating-house {
+    width: 54px;
+    height: 54px;
+  }
+
+  .estate-floating-house::before {
+    width: 38px;
+    height: 38px;
+  }
+
+  .estate-kpi-two {
+    min-width: 0;
+    max-width: 54%;
+  }
+}
+
 .comparison-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
