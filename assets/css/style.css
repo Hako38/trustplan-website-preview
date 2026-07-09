@@ -546,6 +546,10 @@ ul {
   border-color: rgba(7, 24, 47, 0.12);
 }
 
+.btn-inline-cta {
+  margin-top: 22px;
+}
+
 .hero {
   min-height: calc(100vh - var(--header-height));
   display: grid;
