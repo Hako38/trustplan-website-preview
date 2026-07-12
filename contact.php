@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 const RECIPIENT = 'info@trust-plan.de';
-const SUBJECT = 'Neue Anfrage über trust-plan.de';
+const SUBJECT = 'Neue Erstgespräch-Anfrage über trust-plan.de';
 
 function fail_request(string $message, int $status = 400): never
 {
@@ -13,12 +13,12 @@ function fail_request(string $message, int $status = 400): never
     echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
     echo '<meta name="robots" content="noindex, follow">';
     echo '<title>Anfrage konnte nicht gesendet werden | TrustPlan</title>';
-    echo '<link rel="stylesheet" href="./assets/css/style.css?v=20260625-6"></head><body>';
+    echo '<link rel="stylesheet" href="./assets/css/style.css?v=20260709-4"></head><body>';
     echo '<main class="tool-page-main" id="main"><section class="tool-page-hero">';
     echo '<div class="container"><p class="eyebrow">Kontaktformular</p>';
     echo '<h1>Anfrage konnte nicht gesendet werden</h1>';
     echo '<p>' . $safeMessage . '</p>';
-    echo '<p><a class="btn btn-primary" href="./index.html#kontakt">Zurück zum Formular</a></p>';
+    echo '<p><a class="btn btn-primary" href="./kontakt.html">Zurück zum Formular</a></p>';
     echo '</div></section></main></body></html>';
     exit;
 }
@@ -46,27 +46,39 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 if (clean_text($_POST['website'] ?? '') !== '') {
-    header('Location: /danke.html', true, 303);
+    header('Location: ./danke.html', true, 303);
     exit;
 }
 
-$age = clean_text($_POST['age'] ?? '', 20);
-$status = clean_text($_POST['status'] ?? '', 30);
+$situation = clean_text($_POST['situation'] ?? '', 60);
 $income = clean_text($_POST['income'] ?? '', 30);
+$goal = clean_text($_POST['goal'] ?? '', 90);
 $name = clean_text($_POST['name'] ?? '', 100);
 $phone = clean_text($_POST['phone'] ?? '', 50);
 $email = clean_text($_POST['email'] ?? '', 160);
+$message = clean_text($_POST['message'] ?? '', 1200);
+$privacy = clean_text($_POST['privacy'] ?? '', 20);
 $interests = $_POST['interest'] ?? [];
 
-$allowedAges = ['18-30', '31-40', '41-50', '50+'];
-$allowedStatuses = ['Angestellt', 'Selbstständig', 'Unternehmer', 'Beamter'];
+$allowedSituations = ['Gutverdienender Angestellter', 'Selbstständig', 'Unternehmer'];
 $allowedIncomes = ['Unter 2500', '2500-4000', '4000-6000', '6000+'];
-$allowedInterests = ['Steuern', 'Investments', 'Immobilien', 'Versicherungen', 'Altersvorsorge', 'PKV'];
+$allowedInterests = ['Steuern', 'Versicherungen', 'Altersvorsorge', 'Investments', 'Immobilien', 'PKV'];
+$allowedGoals = [
+    'Steuerlast prüfen',
+    'Vermögen strukturierter aufbauen',
+    'Absicherung überprüfen',
+    'Immobilien als nächsten Schritt prüfen',
+    'Finanzielle Gesamtstruktur verstehen',
+];
 
-if (!in_array($age, $allowedAges, true)
-    || !in_array($status, $allowedStatuses, true)
-    || !in_array($income, $allowedIncomes, true)) {
+if (!in_array($situation, $allowedSituations, true)
+    || !in_array($income, $allowedIncomes, true)
+    || !in_array($goal, $allowedGoals, true)) {
     fail_request('Bitte fülle alle Schritte des Formulars vollständig aus.');
+}
+
+if ($privacy !== 'accepted') {
+    fail_request('Bitte bestätige die Datenschutzhinweise.');
 }
 
 if (!is_array($interests)) {
@@ -96,15 +108,17 @@ if ($email === '' || has_header_injection($email) || filter_var($email, FILTER_V
 }
 
 $body = implode("\n", [
-    'Neue Anfrage über trust-plan.de',
+    'Neue Erstgespräch-Anfrage über trust-plan.de',
+    '',
+    'Situation: ' . $situation,
+    'Nettoeinkommen: ' . $income,
+    'Ausgewählte Themen: ' . implode(', ', $interests),
+    'Größtes Ziel: ' . $goal,
     '',
     'Name: ' . $name,
     'Telefon: ' . $phone,
     'E-Mail: ' . $email,
-    'Alter: ' . $age,
-    'Berufsstatus: ' . $status,
-    'Monatliches Netto-Einkommen: ' . $income,
-    'Interessen: ' . implode(', ', $interests),
+    'Nachricht: ' . ($message !== '' ? $message : 'Keine Nachricht angegeben'),
     '',
     'Übermittelt am: ' . date('d.m.Y H:i:s'),
 ]);
@@ -131,5 +145,5 @@ if (!$sent) {
     );
 }
 
-header('Location: /danke.html', true, 303);
+header('Location: ./danke.html', true, 303);
 exit;

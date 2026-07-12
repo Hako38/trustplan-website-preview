@@ -706,14 +706,51 @@
     const prev = form.querySelector("[data-funnel-prev]");
     const next = form.querySelector("[data-funnel-next]");
     const submit = form.querySelector("[data-funnel-submit]");
+    const stages = [...form.querySelectorAll("[data-stage]")];
     let current = 0;
+
+    const getCheckedLabelText = (name) => {
+      const checked = form.querySelector(`input[name="${name}"]:checked`);
+      return checked?.closest("label")?.textContent.trim() || "-";
+    };
+
+    const updateSummary = () => {
+      const summaryTargets = form.querySelectorAll("[data-summary]");
+      if (!summaryTargets.length) return;
+
+      const summary = {
+        situation: getCheckedLabelText("situation"),
+        income: getCheckedLabelText("income"),
+        goal: getCheckedLabelText("goal"),
+        interest: [...form.querySelectorAll('input[name="interest[]"]:checked')]
+          .map((input) => input.closest("label")?.textContent.trim())
+          .filter(Boolean)
+          .join(", ") || "-",
+      };
+
+      summaryTargets.forEach((target) => {
+        target.textContent = summary[target.dataset.summary] || "-";
+      });
+    };
 
     const showStep = () => {
       steps.forEach((step, index) => step.classList.toggle("active", index === current));
+      stages.forEach((stage) => {
+        const stageIndex = Number(stage.dataset.stage || 1);
+        const activeStage = current < 2 ? 1 : current < 4 ? 2 : 3;
+        stage.classList.toggle("active", stageIndex === activeStage);
+        stage.classList.toggle("done", stageIndex < activeStage);
+      });
       if (progress) progress.style.width = `${((current + 1) / steps.length) * 100}%`;
       if (prev) prev.style.visibility = current === 0 ? "hidden" : "visible";
-      if (next) next.classList.toggle("hidden", current === steps.length - 1);
+      const currentStep = steps[current];
+      const autoStep = currentStep?.hasAttribute("data-auto-step");
+      if (next) {
+        next.classList.toggle("hidden", autoStep || current === steps.length - 1);
+        next.textContent = currentStep?.dataset.confirmLabel || "Weiter";
+      }
       if (submit) submit.classList.toggle("hidden", current !== steps.length - 1);
+      updateSummary();
     };
 
     const isCurrentStepValid = () => {
@@ -731,8 +768,18 @@
         }
       }
 
-      if (checkboxes.length && current === 3 && !checkboxes.some((checkbox) => checkbox.checked)) {
-        checkboxes[0].focus();
+      const requiredCheckboxGroup = step.querySelector("[data-required-checkboxes]");
+      if (requiredCheckboxGroup) {
+        const groupCheckboxes = [...requiredCheckboxGroup.querySelectorAll('input[type="checkbox"]')];
+        if (!groupCheckboxes.some((checkbox) => checkbox.checked)) {
+          groupCheckboxes[0]?.focus();
+          return false;
+        }
+      }
+
+      const invalidRequiredCheckbox = checkboxes.find((checkbox) => checkbox.required && !checkbox.checked);
+      if (invalidRequiredCheckbox) {
+        invalidRequiredCheckbox.focus();
         return false;
       }
 
@@ -748,6 +795,21 @@
       if (!isCurrentStepValid()) return;
       current = Math.min(steps.length - 1, current + 1);
       showStep();
+    });
+
+    steps.forEach((step, index) => {
+      if (!step.hasAttribute("data-auto-step")) return;
+      step.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener("change", () => {
+          if (current !== index || !isCurrentStepValid()) return;
+          window.setTimeout(() => {
+            if (current === index) {
+              current = Math.min(steps.length - 1, current + 1);
+              showStep();
+            }
+          }, 220);
+        });
+      });
     });
 
     form.addEventListener("submit", (event) => {
@@ -800,6 +862,146 @@
     );
 
     cards.forEach((card) => observer.observe(card));
+  };
+
+  const initProcessJourney = () => {
+    const section = document.querySelector(".process-section");
+    const journey = section?.querySelector(".process-journey");
+    const heading = section?.querySelector(".section-heading");
+    const steps = journey ? [...journey.querySelectorAll(".process-step")] : [];
+    const route = journey?.querySelector(".process-line");
+    const routeBase = route?.querySelector(".process-line-base");
+    const routeProgress = route?.querySelector(".process-line-progress");
+    if (!section || !journey || !heading || steps.length !== 4) return;
+
+    const updateRoute = () => {
+      if (!route || !routeBase || !routeProgress) return;
+
+      const journeyRect = journey.getBoundingClientRect();
+      const cardRects = steps.map((step) => step.getBoundingClientRect());
+      const width = Math.max(1, journeyRect.width);
+      const height = Math.max(1, journeyRect.height);
+      const points = cardRects.map((rect) => ({
+        x: rect.left - journeyRect.left + rect.width / 2,
+        y: rect.top - journeyRect.top + rect.height / 2,
+        top: rect.top - journeyRect.top,
+        bottom: rect.bottom - journeyRect.top
+      }));
+      const mobile = window.matchMedia("(max-width: 640px)").matches;
+      const tablet = window.matchMedia("(max-width: 1100px)").matches && !mobile;
+      let path = "";
+
+      if (mobile) {
+        path = points.slice(0, -1).map((point, index) => {
+          const next = points[index + 1];
+          const startY = point.bottom - 1;
+          const endY = next.top + 1;
+          const curve = Math.min(24, Math.max(10, (endY - startY) * 0.42));
+          return `M ${point.x} ${startY} C ${point.x + 12} ${startY + curve}, ${next.x - 12} ${endY - curve}, ${next.x} ${endY}`;
+        }).join(" ");
+      } else if (tablet) {
+        path = `M ${points[0].x} ${points[0].y} C ${points[0].x + 48} ${points[0].y - 18}, ${points[1].x - 48} ${points[1].y - 18}, ${points[1].x} ${points[1].y} C ${points[1].x + 18} ${points[1].y + 68}, ${points[2].x + 18} ${points[2].y - 68}, ${points[2].x} ${points[2].y} C ${points[2].x + 48} ${points[2].y + 18}, ${points[3].x - 48} ${points[3].y + 18}, ${points[3].x} ${points[3].y}`;
+      } else {
+        path = `M ${points[0].x} ${points[0].y} C ${points[0].x + 42} ${points[0].y - 20}, ${points[1].x - 42} ${points[1].y - 20}, ${points[1].x} ${points[1].y} C ${points[1].x + 42} ${points[1].y + 20}, ${points[2].x - 42} ${points[2].y + 20}, ${points[2].x} ${points[2].y} C ${points[2].x + 42} ${points[2].y - 20}, ${points[3].x - 42} ${points[3].y - 20}, ${points[3].x} ${points[3].y}`;
+      }
+
+      route.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      routeBase.setAttribute("d", path);
+      routeProgress.setAttribute("d", path);
+    };
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealStaticJourney = () => {
+      section.classList.add("process-reduced");
+      heading.classList.add("process-heading-visible");
+      journey.style.setProperty("--process-progress", "1");
+      steps.forEach((step, index) => {
+        step.classList.add("is-visible", "is-complete");
+        step.classList.toggle("is-active", index === steps.length - 1);
+      });
+    };
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      updateRoute();
+      revealStaticJourney();
+      return;
+    }
+
+    section.classList.add("process-motion");
+
+    let isInView = false;
+    let hasRevealed = false;
+    let framePending = false;
+    let activeIndex = -1;
+    const playedMicros = new Set();
+
+    const updateStepState = (nextIndex) => {
+      if (nextIndex === activeIndex) return;
+      activeIndex = nextIndex;
+
+      steps.forEach((step, index) => {
+        step.classList.toggle("is-pending", index > nextIndex);
+        step.classList.toggle("is-complete", index < nextIndex);
+        step.classList.toggle("is-active", index === nextIndex);
+
+        if (index === nextIndex && !playedMicros.has(index)) {
+          playedMicros.add(index);
+          step.classList.add("micro-played");
+        }
+      });
+
+    };
+
+    const updateProgress = () => {
+      framePending = false;
+      if (!isInView || !hasRevealed) return;
+
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+      const start = viewportHeight * 0.78;
+      const end = viewportHeight * 0.2;
+      const travel = Math.max(1, rect.height + start - end);
+      const progress = clamp((start - rect.top) / travel, 0, 1);
+      const nextIndex = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+
+      journey.style.setProperty("--process-progress", progress.toFixed(3));
+      updateStepState(nextIndex);
+    };
+
+    const requestProgressUpdate = () => {
+      if (framePending) return;
+      framePending = true;
+      requestAnimationFrame(updateProgress);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target !== section) return;
+          isInView = entry.isIntersecting;
+          if (!isInView) return;
+
+          if (!hasRevealed) {
+            hasRevealed = true;
+            heading.classList.add("process-heading-visible");
+            steps.forEach((step, index) => {
+              window.setTimeout(() => step.classList.add("is-visible"), 220 + index * 120);
+            });
+          }
+
+          requestProgressUpdate();
+        });
+      },
+      { threshold: 0.08, rootMargin: "8% 0px 8% 0px" }
+    );
+
+    observer.observe(section);
+    updateRoute();
+    window.addEventListener("scroll", requestProgressUpdate, { passive: true });
+    window.addEventListener("resize", () => {
+      updateRoute();
+      requestProgressUpdate();
+    }, { passive: true });
   };
 
   const initRealEstateVisual = () => {
@@ -861,6 +1063,7 @@
     initFunnel();
     initLeakToggle();
     initDecisionCards();
+    initProcessJourney();
     initRealEstateVisual();
     initImageFallbacks();
     initEscapeToClose();
