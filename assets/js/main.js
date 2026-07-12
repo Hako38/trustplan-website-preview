@@ -835,6 +835,24 @@
       setState(toggle.getAttribute("aria-pressed") !== "true");
     });
 
+    const mobileQuery = window.matchMedia("(max-width: 640px)");
+    if (section && "IntersectionObserver" in window) {
+      let sectionIsVisible = false;
+      const syncBadgeVisibility = () => {
+        document.body.classList.toggle("leak-mobile-active", mobileQuery.matches && sectionIsVisible);
+      };
+      const badgeObserver = new IntersectionObserver(
+        ([entry]) => {
+          sectionIsVisible = entry.isIntersecting;
+          syncBadgeVisibility();
+        },
+        { threshold: 0.08 }
+      );
+
+      badgeObserver.observe(section);
+      mobileQuery.addEventListener("change", syncBadgeVisibility);
+    }
+
     setState(false);
   };
 

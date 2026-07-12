@@ -7542,6 +7542,338 @@ select:focus {
   transition: none;
 }
 
+.leak-copy-mobile {
+  display: none;
+}
+
+/* Leak analysis: compact desktop composition on small screens. */
+@media (max-width: 640px) {
+  .leak-toggle-panel {
+    position: relative;
+    z-index: 8;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .leak-toggle-panel small {
+    font-size: 0.68rem;
+    line-height: 1.1;
+  }
+
+  .leak-toggle {
+    min-height: 50px;
+  }
+
+  .leak-system {
+    width: 100%;
+    min-height: clamp(302px, calc(67vw + 70px), 358px);
+    margin: 0 auto 30px;
+    padding: 0;
+  }
+
+  .leak-system::before {
+    inset: 42px 0 10px;
+    border-radius: 28px;
+    background: transparent;
+    box-shadow: none;
+    filter: none;
+  }
+
+  .leak-income {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    gap: 4px;
+    transform: translateX(-50%);
+  }
+
+  .leak-income span {
+    width: min(78%, 200px);
+    min-width: 0;
+    padding: 8px 9px;
+    gap: 5px;
+    border-radius: 12px;
+    font-size: clamp(0.7rem, 3.35vw, 0.8rem);
+    line-height: 1.1;
+  }
+
+  .leak-income i {
+    width: 8px;
+    height: 30px;
+  }
+
+  .leak-vessel {
+    width: 47%;
+    max-width: none;
+    height: clamp(232px, 67vw, 288px);
+    margin-top: 66px;
+    border-color: transparent;
+    border-radius: 24px 24px 38px 38px;
+  }
+
+  .leak-vessel::before {
+    inset: 6px;
+    border-color: transparent;
+    border-radius: 18px 18px 31px 31px;
+  }
+
+  .leak-vessel::after {
+    background:
+      radial-gradient(circle at 0% 34%, rgba(159, 90, 42, 0.09), transparent 13%),
+      radial-gradient(circle at 100% 34%, rgba(159, 90, 42, 0.08), transparent 13%),
+      radial-gradient(circle at 0% 62%, rgba(159, 90, 42, 0.07), transparent 13%),
+      radial-gradient(circle at 100% 62%, rgba(159, 90, 42, 0.07), transparent 13%);
+  }
+
+  .leak-liquid {
+    inset: auto 6px 6px;
+    border-radius: 15px 15px 31px 31px;
+  }
+
+  .leak-liquid::before {
+    top: -7px;
+    height: 15px;
+  }
+
+  .leak-core {
+    top: 13%;
+    width: 86%;
+    padding: 8px 5px;
+    border-radius: 12px;
+  }
+
+  .leak-core small {
+    margin-bottom: 3px;
+    font-size: clamp(0.42rem, 1.75vw, 0.52rem);
+    letter-spacing: 0.06em;
+  }
+
+  .leak-core strong {
+    font-size: clamp(0.64rem, 2.55vw, 0.78rem);
+    line-height: 1.15;
+  }
+
+  .leak-remaining {
+    bottom: 7%;
+    width: 92%;
+  }
+
+  .leak-remaining small {
+    margin-bottom: 2px;
+    font-size: clamp(0.43rem, 1.75vw, 0.52rem);
+    line-height: 1.15;
+  }
+
+  .leak-remaining strong {
+    font-size: clamp(0.65rem, 2.55vw, 0.8rem);
+    line-height: 1.1;
+  }
+
+  .leak-spills::before {
+    top: 63%;
+    right: -4px;
+    width: 16px;
+    height: 25px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .leak-port {
+    display: block;
+    width: clamp(62px, 20.5vw, 88px);
+    font-size: clamp(0.48rem, 1.95vw, 0.61rem);
+    line-height: 1.16;
+  }
+
+  .leak-port-one,
+  .leak-port-three,
+  .leak-port-five {
+    right: calc(100% + 7px);
+  }
+
+  .leak-port-two,
+  .leak-port-four,
+  .leak-port-six {
+    left: calc(100% + 7px);
+  }
+
+  .leak-port-one,
+  .leak-port-two {
+    top: 16%;
+  }
+
+  .leak-port-three,
+  .leak-port-four {
+    top: 45%;
+  }
+
+  .leak-port-five,
+  .leak-port-six {
+    top: 73%;
+  }
+
+  .leak-port::before {
+    width: 7px;
+    height: 1px;
+  }
+
+  .leak-port::after {
+    top: calc(50% - 2px);
+    width: 5px;
+    height: 5px;
+    box-shadow: 0 0 0 3px rgba(255, 90, 103, 0.1), 0 0 9px rgba(255, 90, 103, 0.26);
+  }
+
+  .leak-port-one::after,
+  .leak-port-three::after,
+  .leak-port-five::after {
+    left: calc(100% + 6px);
+  }
+
+  .leak-port-two::after,
+  .leak-port-four::after,
+  .leak-port-six::after {
+    right: calc(100% + 6px);
+  }
+
+  .leak-system.is-after .leak-port::after {
+    box-shadow: 0 0 0 3px rgba(50, 213, 131, 0.1), 0 0 9px rgba(50, 213, 131, 0.26);
+  }
+
+  .leak-port-card {
+    min-height: 0;
+    grid-template-columns: 15px minmax(0, 1fr);
+    gap: 4px;
+    padding: 5px 4px;
+    background: transparent;
+    border-color: transparent;
+    border-radius: 9px;
+    box-shadow: none;
+    backdrop-filter: none;
+    text-wrap: balance;
+  }
+
+  .leak-system.is-after .leak-port-card {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .leak-sign {
+    width: 15px;
+    height: 15px;
+    font-size: 0.74rem;
+    box-shadow: 0 3px 8px rgba(255, 90, 103, 0.2);
+  }
+
+  .leak-amount {
+    margin-top: 1px;
+    font-size: 0.96em;
+  }
+
+  .leak-mobile-flow,
+  .leak-mobile-points {
+    display: none;
+  }
+
+  .leak-mobile-active .proseal-widget {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .leak-copy-mobile {
+    display: block;
+  }
+
+  .leak-copy-desktop {
+    display: none;
+  }
+
+  .leak-port {
+    font-size: clamp(0.57rem, 2.25vw, 0.68rem);
+    line-height: 1.15;
+  }
+
+  .leak-port-card {
+    grid-template-columns: 14px minmax(0, 1fr);
+    gap: 3px;
+    padding: 4px 3px;
+  }
+
+  .leak-port-card em {
+    font-weight: 850;
+    line-height: 1.15;
+  }
+
+  /* Keep both icon columns facing the central tank. */
+  .leak-port-one .leak-port-card,
+  .leak-port-three .leak-port-card,
+  .leak-port-five .leak-port-card {
+    grid-template-columns: minmax(0, 1fr) 14px;
+  }
+
+  .leak-port-one .leak-sign,
+  .leak-port-three .leak-sign,
+  .leak-port-five .leak-sign {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .leak-port-one .leak-port-card em,
+  .leak-port-three .leak-port-card em,
+  .leak-port-five .leak-port-card em {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  .leak-port-one .leak-port-card em {
+    transform: translateY(-4px);
+  }
+
+  .leak-port-one .leak-amount,
+  .leak-port-three .leak-amount,
+  .leak-port-five .leak-amount {
+    width: auto;
+    margin-left: 0;
+    text-align: right;
+  }
+
+  .leak-sign {
+    width: 14px;
+    height: 14px;
+    font-size: 0.68rem;
+  }
+
+  .leak-amount {
+    width: calc(100% + 17px);
+    display: block;
+    margin: 2px 0 0 -17px;
+    color: var(--red);
+    font-size: clamp(0.63rem, 2.8vw, 0.75rem);
+    font-weight: 900;
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .leak-section .center-action {
+    margin-top: 16px;
+  }
+
+  .leak-section .center-action .btn {
+    width: min(76%, 270px);
+    min-height: 44px;
+    padding: 0 12px;
+    justify-content: center;
+    color: var(--white);
+    font-size: clamp(0.88rem, 3.5vw, 1rem);
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
 /* Corrected process route: one quiet SVG band, visible only between or behind cards. */
 .process-journey {
   padding-left: 0;
