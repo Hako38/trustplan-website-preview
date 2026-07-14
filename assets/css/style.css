@@ -4072,8 +4072,80 @@ details p {
   background: rgba(255, 255, 255, 0.94);
 }
 
+/* Home funnel controls: custom shapes prevent browser-specific input artifacts. */
+.funnel:not(.contact-funnel-card) .option-grid input[type="radio"],
+.funnel:not(.contact-funnel-card) .option-grid input[type="checkbox"],
+.home-funnel-privacy input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  min-height: 20px;
+  margin: 0;
+  border: 2px solid rgba(7, 24, 47, 0.42);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: none;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.funnel:not(.contact-funnel-card) .option-grid input[type="radio"] {
+  border-radius: 50%;
+}
+
+.funnel:not(.contact-funnel-card) .option-grid input[type="checkbox"],
+.home-funnel-privacy input[type="checkbox"] {
+  border-radius: 5px;
+}
+
+.funnel:not(.contact-funnel-card) .option-grid input[type="radio"]:checked {
+  border-color: var(--orange-2);
+  background: radial-gradient(circle, var(--orange-2) 0 42%, rgba(255, 255, 255, 0.98) 46% 100%);
+  box-shadow: 0 0 0 3px rgba(196, 122, 63, 0.16);
+}
+
+.funnel:not(.contact-funnel-card) .option-grid input[type="checkbox"]:checked,
+.home-funnel-privacy input[type="checkbox"]:checked {
+  border-color: var(--orange-2);
+  background: var(--orange-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3 8 3 3 7-7' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.2'/%3E%3C/svg%3E") center / 13px 13px no-repeat;
+  box-shadow: 0 0 0 3px rgba(196, 122, 63, 0.16);
+}
+
+.funnel:not(.contact-funnel-card) .option-grid label:has(input:checked) {
+  border-color: rgba(196, 122, 63, 0.72);
+  box-shadow: 0 14px 30px rgba(159, 90, 42, 0.14);
+}
+
+.funnel:not(.contact-funnel-card) .option-grid input:focus-visible,
+.home-funnel-privacy input:focus-visible {
+  outline: 3px solid rgba(196, 122, 63, 0.32);
+  outline-offset: 3px;
+}
+
 .field-grid label {
   color: var(--white);
+}
+
+.home-funnel-privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.home-funnel-privacy input {
+  flex: 0 0 auto;
+  margin: 2px 0 0;
+}
+
+.home-funnel-privacy a {
+  color: var(--white);
+  text-decoration-color: var(--orange-2);
+  text-underline-offset: 3px;
 }
 
 .funnel-actions {
@@ -4136,6 +4208,126 @@ details p {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.84);
   font-weight: 750;
+}
+
+.contact-google-reviews {
+  width: min(100%, 640px);
+  margin-top: 30px;
+}
+
+.contact-google-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 7px;
+  color: var(--white);
+  font-size: 0.92rem;
+  font-weight: 850;
+  letter-spacing: 0.01em;
+}
+
+.contact-google-heading > span:last-child {
+  color: transparent;
+  background: linear-gradient(100deg, #e2b26c 0%, #fff2c8 43%, #bf7138 64%, #f2cb8b 100%);
+  background-clip: text;
+  background-size: 190% 100%;
+  animation: contactGoogleHeadingShine 7s ease-in-out infinite;
+  font-size: 0.9em;
+}
+
+.contact-google-marquee {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  padding: 7px 0 10px;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.contact-google-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 26px;
+  animation: contactGoogleMarquee 68s linear infinite;
+  will-change: transform;
+}
+
+.contact-google-marquee-track > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.contact-google-marquee-track > span:not(.contact-google-marquee-label)::before {
+  content: "★★★★★";
+  color: #e8b45b;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.contact-google-marquee-track > span:not(.contact-google-marquee-label) {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-google-marquee-track > span:not(.contact-google-marquee-label) strong {
+  color: var(--white);
+}
+
+.contact-google-word {
+  display: inline-flex;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.07em;
+}
+
+@keyframes contactGoogleHeadingShine {
+  0%, 100% { background-position: 100% 50%; }
+  50% { background-position: 0 50%; }
+}
+
+.contact-google-word i {
+  font-style: normal;
+}
+
+.contact-google-word i:nth-child(1),
+.contact-google-word i:nth-child(4) {
+  color: #4285f4;
+}
+
+.contact-google-word i:nth-child(2),
+.contact-google-word i:nth-child(6) {
+  color: #ea4335;
+}
+
+.contact-google-word i:nth-child(3) {
+  color: #fbbc05;
+}
+
+.contact-google-word i:nth-child(5) {
+  color: #34a853;
+}
+
+.contact-google-marquee:hover .contact-google-marquee-track,
+.contact-google-marquee:focus-visible .contact-google-marquee-track {
+  animation-play-state: paused;
+}
+
+.contact-google-marquee:focus-visible {
+  outline: 2px solid rgba(211, 154, 94, 0.9);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+@keyframes contactGoogleMarquee {
+  to { transform: translateX(-50%); }
 }
 
 .contact-funnel-card {
@@ -6411,11 +6603,11 @@ select:focus {
 }
 
 /* Contact details: a calm, unified field system for the final funnel step only. */
-.contact-page .contact-funnel-card [data-step="5"] .contact-field-grid {
+.contact-page .contact-funnel-card [data-step="4"] .contact-field-grid {
   gap: 14px;
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .contact-field-grid label {
+.contact-page .contact-funnel-card [data-step="4"] .contact-field-grid label {
   gap: 7px;
   padding: 0;
   border: 0;
@@ -6427,8 +6619,8 @@ select:focus {
   letter-spacing: 0.02em;
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .contact-field-grid input,
-.contact-page .contact-funnel-card [data-step="5"] .contact-field-grid textarea {
+.contact-page .contact-funnel-card [data-step="4"] .contact-field-grid input,
+.contact-page .contact-funnel-card [data-step="4"] .contact-field-grid textarea {
   width: 100%;
   min-height: 54px;
   margin: 0;
@@ -6444,24 +6636,24 @@ select:focus {
   transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .contact-field-grid textarea {
+.contact-page .contact-funnel-card [data-step="4"] .contact-field-grid textarea {
   min-height: 124px;
   resize: vertical;
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .contact-field-grid input::placeholder,
-.contact-page .contact-funnel-card [data-step="5"] .contact-field-grid textarea::placeholder {
+.contact-page .contact-funnel-card [data-step="4"] .contact-field-grid input::placeholder,
+.contact-page .contact-funnel-card [data-step="4"] .contact-field-grid textarea::placeholder {
   color: rgba(7, 24, 47, 0.48);
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .contact-field-grid input:focus,
-.contact-page .contact-funnel-card [data-step="5"] .contact-field-grid textarea:focus {
+.contact-page .contact-funnel-card [data-step="4"] .contact-field-grid input:focus,
+.contact-page .contact-funnel-card [data-step="4"] .contact-field-grid textarea:focus {
   border-color: rgba(196, 122, 63, 0.86);
   background: var(--white);
   box-shadow: 0 0 0 4px rgba(196, 122, 63, 0.16), 0 14px 32px rgba(0, 0, 0, 0.13);
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .privacy-check {
+.contact-page .contact-funnel-card [data-step="4"] .privacy-check {
   display: grid;
   grid-template-columns: 20px minmax(0, 1fr);
   align-items: start;
@@ -6478,7 +6670,7 @@ select:focus {
   line-height: 1.5;
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .privacy-check input[type="checkbox"] {
+.contact-page .contact-funnel-card [data-step="4"] .privacy-check input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   width: 20px;
@@ -6494,24 +6686,24 @@ select:focus {
   transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .privacy-check input[type="checkbox"]:checked {
+.contact-page .contact-funnel-card [data-step="4"] .privacy-check input[type="checkbox"]:checked {
   border-color: var(--orange-2);
   background: var(--orange-2);
   box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.94);
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .privacy-check input[type="checkbox"]:focus-visible {
+.contact-page .contact-funnel-card [data-step="4"] .privacy-check input[type="checkbox"]:focus-visible {
   outline: 3px solid rgba(196, 122, 63, 0.36);
   outline-offset: 3px;
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .privacy-check a {
+.contact-page .contact-funnel-card [data-step="4"] .privacy-check a {
   color: #efbd91;
   font-weight: 750;
   text-decoration-thickness: 1px;
 }
 
-.contact-page .contact-funnel-card [data-step="5"] .privacy-copy {
+.contact-page .contact-funnel-card [data-step="4"] .privacy-copy {
   display: block;
   min-width: 0;
   overflow-wrap: normal;
@@ -7902,6 +8094,189 @@ select:focus {
 .process-motion .process-step.is-active,
 .process-motion .process-step.is-active:hover {
   transform: none;
+}
+
+/* PKV calculator: composed from the supplied health, finance and care assets. */
+.tool-page-hero-media.pkv-hero-composition {
+  isolation: isolate;
+  height: clamp(290px, 38vw, 430px);
+  min-height: 0;
+  margin-top: 32px;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(196, 122, 63, 0.21), transparent 27%),
+    radial-gradient(circle at 86% 78%, rgba(24, 75, 137, 0.25), transparent 31%),
+    linear-gradient(138deg, #fafdff 0%, #e7eef8 52%, #d7e5f6 100%);
+}
+
+.tool-page-hero-media.pkv-hero-composition::before {
+  content: "";
+  position: absolute;
+  inset: 9% 8%;
+  z-index: 0;
+  border: 1px solid rgba(196, 122, 63, 0.22);
+  border-radius: 28px;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.75);
+  pointer-events: none;
+}
+
+.tool-page-hero-media.pkv-hero-composition::after {
+  z-index: 5;
+  background:
+    linear-gradient(125deg, rgba(255, 255, 255, 0.34), transparent 34%),
+    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.4), transparent 26%);
+}
+
+.tool-page-hero-media.pkv-hero-composition .pkv-hero-layer {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 22px;
+  box-shadow: 0 18px 36px rgba(7, 24, 47, 0.16);
+  pointer-events: none;
+}
+
+.tool-page-hero-media.pkv-hero-composition .pkv-hero-layer img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.04);
+}
+
+.pkv-hero-health-card {
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 57%;
+  aspect-ratio: 1.62;
+  transform: translate(-50%, -49%) rotate(-1deg);
+  background: #f8fbff;
+  animation: pkv-card-float 9s ease-in-out infinite;
+}
+
+.pkv-hero-health-card img {
+  object-position: center 53%;
+}
+
+.pkv-hero-stethoscope {
+  top: 5%;
+  left: 4%;
+  z-index: 2;
+  width: 32%;
+  height: 86%;
+  transform: rotate(-8deg);
+  opacity: 0.96;
+  animation: pkv-stethoscope-drift 11s ease-in-out infinite;
+}
+
+.pkv-hero-stethoscope img {
+  object-position: center 53%;
+}
+
+.pkv-hero-coins {
+  bottom: -10%;
+  left: 12%;
+  z-index: 4;
+  width: 28%;
+  height: 49%;
+  transform: rotate(-5deg);
+  animation: pkv-coins-lift 7.5s ease-in-out infinite;
+}
+
+.pkv-hero-coins img {
+  object-position: center 56%;
+}
+
+.pkv-hero-banknotes {
+  top: -6%;
+  right: -5%;
+  z-index: 1;
+  width: 47%;
+  height: 85%;
+  transform: rotate(-10deg);
+  opacity: 0.76;
+  animation: pkv-banknotes-parallax 16s ease-in-out infinite;
+}
+
+.pkv-hero-banknotes img {
+  object-position: center 54%;
+  mix-blend-mode: multiply;
+}
+
+@keyframes pkv-card-float {
+  0%, 100% { transform: translate(-50%, -49%) rotate(-1deg); }
+  50% { transform: translate(-50%, -53%) rotate(0.6deg); }
+}
+
+@keyframes pkv-stethoscope-drift {
+  0%, 100% { transform: translateX(0) rotate(-8deg); }
+  50% { transform: translateX(10px) translateY(-5px) rotate(-5.5deg); }
+}
+
+@keyframes pkv-coins-lift {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-10px) rotate(-3deg); }
+}
+
+@keyframes pkv-banknotes-parallax {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-10deg); }
+  50% { transform: translate3d(-12px, 8px, 0) rotate(-7deg); }
+}
+
+@media (max-width: 768px) {
+  .tool-page-hero-media.pkv-hero-composition {
+    height: clamp(258px, 76vw, 360px);
+    margin-top: 25px;
+  }
+
+  .pkv-hero-health-card {
+    width: 76%;
+  }
+
+  .pkv-hero-stethoscope {
+    top: 8%;
+    left: -2%;
+    width: 35%;
+    height: 75%;
+  }
+
+  .pkv-hero-coins {
+    bottom: -13%;
+    left: 9%;
+    width: 33%;
+    height: 45%;
+  }
+
+  .pkv-hero-banknotes {
+    top: -5%;
+    right: -12%;
+    width: 56%;
+    height: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .tool-page-hero-media.pkv-hero-composition {
+    height: min(72vw, 300px);
+  }
+
+  .tool-page-hero-media.pkv-hero-composition::before {
+    inset: 8% 6%;
+    border-radius: 22px;
+  }
+
+  .tool-page-hero-media.pkv-hero-composition .pkv-hero-layer {
+    border-radius: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pkv-hero-health-card,
+  .pkv-hero-stethoscope,
+  .pkv-hero-coins,
+  .pkv-hero-banknotes {
+    animation: none;
+  }
 }
 
 @media (max-width: 640px) {

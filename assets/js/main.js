@@ -147,10 +147,10 @@
         }
       ],
       [
-        "Für wen Trustplan besonders sinnvoll ist",
+        "Für wen TrustPlan besonders sinnvoll ist",
         {
           variant: "words",
-          html: '<span class="title-word">Für</span> <span class="title-word">wen</span> <span class="title-word">Trustplan</span> <span class="title-word title-accent title-neutral title-wipe">besonders sinnvoll</span> <span class="title-word">ist</span>'
+          html: '<span class="title-word">Für</span> <span class="title-word">wen</span> <span class="title-word">TrustPlan</span> <span class="title-word title-accent title-neutral title-wipe">besonders sinnvoll</span> <span class="title-word">ist</span>'
         }
       ],
       [
@@ -721,7 +721,6 @@
       const summary = {
         situation: getCheckedLabelText("situation"),
         income: getCheckedLabelText("income"),
-        goal: getCheckedLabelText("goal"),
         interest: [...form.querySelectorAll('input[name="interest[]"]:checked')]
           .map((input) => input.closest("label")?.textContent.trim())
           .filter(Boolean)
@@ -737,7 +736,7 @@
       steps.forEach((step, index) => step.classList.toggle("active", index === current));
       stages.forEach((stage) => {
         const stageIndex = Number(stage.dataset.stage || 1);
-        const activeStage = current < 2 ? 1 : current < 4 ? 2 : 3;
+        const activeStage = current < 2 ? 1 : current < 3 ? 2 : 3;
         stage.classList.toggle("active", stageIndex === activeStage);
         stage.classList.toggle("done", stageIndex < activeStage);
       });

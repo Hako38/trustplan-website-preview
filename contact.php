@@ -50,9 +50,10 @@ if (clean_text($_POST['website'] ?? '') !== '') {
     exit;
 }
 
-$situation = clean_text($_POST['situation'] ?? '', 60);
+$age = clean_text($_POST['age'] ?? '', 20);
+$status = clean_text($_POST['status'] ?? '', 60);
+$situation = clean_text($_POST['situation'] ?? $status, 60);
 $income = clean_text($_POST['income'] ?? '', 30);
-$goal = clean_text($_POST['goal'] ?? '', 90);
 $name = clean_text($_POST['name'] ?? '', 100);
 $phone = clean_text($_POST['phone'] ?? '', 50);
 $email = clean_text($_POST['email'] ?? '', 160);
@@ -60,21 +61,17 @@ $message = clean_text($_POST['message'] ?? '', 1200);
 $privacy = clean_text($_POST['privacy'] ?? '', 20);
 $interests = $_POST['interest'] ?? [];
 
-$allowedSituations = ['Gutverdienender Angestellter', 'Selbstständig', 'Unternehmer'];
+$allowedSituations = ['Gutverdienender Angestellter', 'Azubi/Student', 'Angestellt', 'Selbstständig', 'Selbständig/Unternehmer', 'Unternehmer', 'Beamter', 'Sonstiges'];
+$allowedAges = ['18-30', '31-40', '41-50', '50+'];
 $allowedIncomes = ['Unter 2500', '2500-4000', '4000-6000', '6000+'];
 $allowedInterests = ['Steuern', 'Versicherungen', 'Altersvorsorge', 'Investments', 'Immobilien', 'PKV'];
-$allowedGoals = [
-    'Steuerlast prüfen',
-    'Vermögen strukturierter aufbauen',
-    'Absicherung überprüfen',
-    'Immobilien als nächsten Schritt prüfen',
-    'Finanzielle Gesamtstruktur verstehen',
-];
-
 if (!in_array($situation, $allowedSituations, true)
-    || !in_array($income, $allowedIncomes, true)
-    || !in_array($goal, $allowedGoals, true)) {
+    || !in_array($income, $allowedIncomes, true)) {
     fail_request('Bitte fülle alle Schritte des Formulars vollständig aus.');
+}
+
+if ($status !== '' && !in_array($age, $allowedAges, true)) {
+    fail_request('Bitte gib eine gültige Altersgruppe an.');
 }
 
 if ($privacy !== 'accepted') {
@@ -111,9 +108,9 @@ $body = implode("\n", [
     'Neue Erstgespräch-Anfrage über trust-plan.de',
     '',
     'Situation: ' . $situation,
+    'Alter: ' . ($age !== '' ? $age : 'Nicht angegeben'),
     'Nettoeinkommen: ' . $income,
     'Ausgewählte Themen: ' . implode(', ', $interests),
-    'Größtes Ziel: ' . $goal,
     '',
     'Name: ' . $name,
     'Telefon: ' . $phone,
