@@ -697,7 +697,7 @@ ul {
   justify-content: center;
 }
 
-.provenexpert-widget {
+.google-review-widget {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
@@ -707,41 +707,8 @@ ul {
   margin-top: 14px;
 }
 
-.provenexpert-widget > * {
+.google-review-widget > * {
   max-width: 100%;
-}
-
-.provenexpert-fallback {
-  display: inline-grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 2px 10px;
-  width: min(100%, 292px);
-  min-height: 48px;
-  padding: 8px 13px;
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: var(--radius);
-  backdrop-filter: blur(12px);
-}
-
-.provenexpert-stars {
-  grid-row: span 2;
-  color: var(--orange-2);
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
-}
-
-.provenexpert-fallback strong {
-  font-size: 0.9rem;
-  line-height: 1.1;
-}
-
-.provenexpert-fallback small {
-  color: rgba(255, 255, 255, 0.64);
-  font-size: 0.76rem;
-  line-height: 1.1;
 }
 
 .google-review-button {
@@ -771,31 +738,161 @@ ul {
   transform: translateY(-2px);
 }
 
-.proseal-widget {
-  position: fixed;
-  left: 14px;
-  right: auto;
-  top: auto;
-  bottom: 14px;
-  z-index: 9999;
-  line-height: 1;
-  width: auto;
-  max-width: 210px;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  pointer-events: auto;
+.cta-trust-signals {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-@media (max-width: 991px) {
-  .proseal-widget {
-    left: 10px;
-    right: auto;
-    top: auto;
-    bottom: 12px;
-    transform: scale(0.82);
-    transform-origin: bottom left;
+.cta-conversion-group {
+  display: flex;
+  flex: 0 1 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: min(100%, 430px);
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.cta-conversion-group > .btn {
+  align-self: center;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+}
+
+.cta-trust-signals .google-review-button {
+  width: auto;
+  min-width: 164px;
+  min-height: 58px;
+  gap: 8px;
+  padding: 8px 12px;
+  color: var(--navy-900);
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(10, 35, 67, 0.14);
+  border-radius: 16px;
+  text-align: left;
+  box-shadow: 0 8px 22px rgba(8, 28, 55, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.google-rating-mark {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  background: conic-gradient(from 35deg, #4285f4 0 25%, #34a853 0 48%, #fbbc05 0 72%, #ea4335 0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.google-rating-copy {
+  display: grid;
+  gap: 1px;
+  line-height: 1.05;
+}
+
+.google-rating-copy strong {
+  color: var(--navy-900);
+  font-size: 0.78rem;
+}
+
+.google-rating-copy span {
+  color: #53647b;
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+
+.google-rating-copy i {
+  color: #f6bf40;
+  font-size: 0.66rem;
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+
+.cta-trust-signals .google-review-button:hover,
+.cta-trust-signals .google-review-button:focus-visible {
+  color: var(--navy-900);
+  background: var(--white);
+  border-color: rgba(159, 90, 42, 0.46);
+}
+
+.cta-provenexpert-seal {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+.cta-provenexpert-seal > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cta-trust-signals #pe_badge_dtbrfwxc,
+.cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-outer,
+.cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-inner,
+.cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-front,
+.cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-back,
+.cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-front img,
+.cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-back img {
+  width: 58px !important;
+  height: 58px !important;
+}
+
+.cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-back img:not(.pe-parent-fixed) {
+  left: 0 !important;
+  top: 0 !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+@media (max-width: 480px) {
+  .cta-trust-signals {
+    gap: 8px;
+  }
+
+  .cta-conversion-group {
+    width: min(100%, 340px);
+    gap: 8px;
+  }
+
+  .cta-conversion-group > .btn {
+    width: min(100%, 320px);
+  }
+
+  .cta-trust-signals .google-review-button {
+    min-width: 152px;
+    min-height: 54px;
+    padding: 7px 10px;
+  }
+
+  .cta-provenexpert-seal,
+  .cta-trust-signals #pe_badge_dtbrfwxc,
+  .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-outer,
+  .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-inner,
+  .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-front,
+  .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-back,
+  .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-front img,
+  .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-back img {
+    width: 52px !important;
+    height: 52px !important;
   }
 }
 
@@ -3387,6 +3484,24 @@ input[type="range"] {
   background: conic-gradient(var(--red) calc(var(--pkv-score) * 1%), rgba(7, 24, 47, 0.08) 0);
 }
 
+.pkv-assessment.is-zero .pkv-score-gauge {
+  background: linear-gradient(145deg, #ffb1ad, var(--red));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    0 18px 42px rgba(220, 78, 88, 0.24);
+}
+
+.pkv-assessment.is-zero .pkv-score-gauge > div {
+  background:
+    radial-gradient(circle at 30% 12%, rgba(255, 255, 255, 0.9), transparent 34%),
+    linear-gradient(145deg, #fff5f4, #ffdedd);
+}
+
+.pkv-assessment.is-zero .pkv-score-gauge strong,
+.pkv-assessment.is-zero .pkv-score-gauge span {
+  color: var(--red);
+}
+
 .pkv-assessment.is-high .pkv-score-gauge {
   background: conic-gradient(var(--green) calc(var(--pkv-score) * 1%), rgba(7, 24, 47, 0.08) 0);
 }
@@ -4153,6 +4268,15 @@ details p {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 24px;
+}
+
+.funnel-actions .funnel-cta-trust {
+  flex-basis: 100%;
+  margin-bottom: 2px;
+}
+
+.funnel-actions:has([data-funnel-submit].hidden) .funnel-cta-trust {
+  display: none;
 }
 
 .contact-main {
@@ -5241,15 +5365,14 @@ details p {
     line-height: 1;
   }
 
-  .hero .provenexpert-widget {
+  .hero .google-review-widget {
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     align-items: stretch;
     gap: 8px;
   }
 
-  .hero .provenexpert-fallback,
   .hero .google-review-button {
     width: 100%;
     height: 100%;
@@ -5260,24 +5383,22 @@ details p {
     border-radius: 16px;
   }
 
-  .hero .provenexpert-fallback {
-    grid-template-columns: 1fr;
-    gap: 3px;
-  }
-
-  .hero .provenexpert-stars {
-    grid-row: auto;
-    font-size: 0.72rem;
-  }
-
-  .hero .provenexpert-fallback strong,
   .hero .google-review-button {
     font-size: clamp(0.76rem, 3vw, 0.9rem);
     line-height: 1.12;
   }
 
-  .hero .provenexpert-fallback small {
-    font-size: 0.66rem;
+  .hero .cta-conversion-group {
+    width: min(100%, 340px);
+  }
+
+  .hero .cta-trust-signals .google-review-button {
+    width: auto;
+    height: auto;
+    min-height: 54px;
+    justify-content: flex-start;
+    padding: 7px 10px;
+    text-align: left;
   }
 
   .dashboard-shell,
@@ -5500,7 +5621,6 @@ body {
 
 .hero-proof-stats article,
 .trust-badges span,
-.provenexpert-fallback,
 .mini-card,
 .dashboard-shell,
 .glass-card,
@@ -5520,8 +5640,7 @@ body {
 }
 
 .hero-proof-stats article,
-.trust-badges span,
-.provenexpert-fallback {
+.trust-badges span {
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.045)),
     rgba(8, 24, 47, 0.52);
@@ -6534,23 +6653,6 @@ select:focus {
   justify-self: end;
 }
 
-.contact-page .proseal-widget {
-  position: static;
-  z-index: auto;
-  display: flex;
-  align-items: flex-start;
-  width: fit-content;
-  max-width: 100%;
-  margin-top: 30px;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
-}
-
-.contact-page .proseal-widget > div {
-  max-width: 100%;
-}
-
 .contact-page .contact-funnel-card .option-grid label {
   background: rgba(255, 255, 255, 0.9);
   color: var(--navy-950);
@@ -6806,16 +6908,6 @@ select:focus {
     justify-content: center;
   }
 
-  .contact-page .proseal-widget {
-    position: fixed;
-    left: 12px;
-    right: auto;
-    bottom: 12px;
-    z-index: 40;
-    margin-right: auto;
-    margin-left: 0;
-  }
-
   .contact-page .contact-funnel-card {
     justify-self: center;
     margin: 0 auto;
@@ -6830,17 +6922,6 @@ select:focus {
     min-height: 560px;
   }
 
-  .contact-page .proseal-widget {
-    width: 118px;
-    height: 178px;
-    margin-top: auto;
-    margin-bottom: 4px;
-  }
-
-  .contact-page .proseal-widget > div {
-    transform: scale(0.78);
-    transform-origin: left bottom;
-  }
 }
 
 @media (max-width: 768px) {
@@ -6890,24 +6971,6 @@ select:focus {
     font-size: 0.78rem;
     line-height: 1.25;
     text-align: center;
-  }
-
-  .contact-page .proseal-widget {
-    display: block;
-    left: 10px;
-    bottom: 10px;
-    width: 100px;
-    height: 150px;
-    margin-top: 18px;
-    margin-right: auto;
-    margin-left: 0;
-    border-radius: 10px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
-  }
-
-  .contact-page .proseal-widget > div {
-    transform: scale(0.66);
-    transform-origin: left top;
   }
 
   .contact-page .contact-funnel-card {
@@ -7015,23 +7078,6 @@ select:focus {
   .contact-page .funnel-stage-nav span {
     display: none;
   }
-}
-
-/* Contact footer: ProvenExpert is deliberately contained beneath the brand copy. */
-.contact-page .site-footer .proseal-widget {
-  position: static;
-  display: block;
-  width: 150px;
-  min-height: 250px;
-  margin: 18px 0 0;
-  overflow: visible;
-  border-radius: 10px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
-}
-
-.contact-page .site-footer .proseal-widget > div {
-  max-width: none;
-  transform: none;
 }
 
 /* Decision areas: a connected visual financial map using the existing five texts. */
@@ -7966,11 +8012,6 @@ select:focus {
   .leak-mobile-flow,
   .leak-mobile-points {
     display: none;
-  }
-
-  .leak-mobile-active .proseal-widget {
-    opacity: 0;
-    pointer-events: none;
   }
 
   .leak-copy-mobile {

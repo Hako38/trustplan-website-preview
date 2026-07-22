@@ -475,20 +475,21 @@
       const income = Number(form.querySelector('[data-pkv="income"]')?.value || 0);
       let score = 0;
 
-      if (age >= 60) {
-        score = 0;
-      } else if (age >= 55) {
-        score = 15;
-      } else if (status === "Angestellt") {
+      if (status === "Angestellt") {
         if (income < 6250) score = 0;
         else if (income >= 7000) score = 100;
         else score = age >= 40 ? 70 : 80;
+      } else if (age >= 60) {
+        score = 0;
+      } else if (age >= 55) {
+        score = 15;
       } else if (["Selbstständig", "Unternehmer"].includes(status)) {
         score = 30;
       }
 
       score = clamp(score, 0, 100);
-      output.classList.remove("is-low", "is-medium", "is-high");
+      output.classList.remove("is-low", "is-medium", "is-high", "is-zero");
+      if (score === 0) output.classList.add("is-zero");
 
       if (score <= 35) {
         output.classList.add("is-low");
@@ -1046,6 +1047,81 @@
     window.addEventListener("resize", requestUpdate, { passive: true });
   };
 
+  const initCtaTrustSignals = () => {
+    const googleReviewUrl = "https://www.google.com/search?sca_esv=d3caeb1c7ee2fe72&sxsrf=APpeQntG4bvHBeHpn_8wjr--iLrekEF3Ow:1783502486710&q=TrustPlan+Finanzkonzepte+Rezensionen&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_063R5fz_pcASmtWEHIdpiaSfcM192M0TLqE7zl8o7d3tzkHORbM1gDWHCwkmUI0fpfohoU%3D&uds=AJ5uw195omnGJ76DOhPThDoE1qc-TyXd6lywgsi6Vb_e4SkCA7IdnO1z1lFGWMvnApg1ueYqSzrmG7tlu2X8tsATW0WiBTuCm3t05FpUq-0bWUEDDY4g5RD6YL__OtQOf-z7awpuQqtB5q7vzalq4VGApnEAzEMNvw&sa=X&ved=2ahUKEwidlLTB4MKVAxXAX_EDHVl-AykQ3PALegQILxAF&biw=1440&bih=778&dpr=2";
+    const provenProfileUrl = "https://www.provenexpert.com/trustplan-finanzkonzepte/?utm_source=Badge&utm_medium=Badge&utm_campaign=Badge";
+    const provenSealUrl = "https://www.provenexpert.com/profile/de-de/awards-2026/recommendation.svg";
+    const ctas = Array.from(document.querySelectorAll('a.btn[href="./kontakt.html"]')).filter(
+      (cta) => !cta.classList.contains("nav-cta") && !cta.closest(".contact-google-reviews")
+    );
+    const funnelSubmitButtons = Array.from(document.querySelectorAll("[data-funnel-submit]"));
+
+    if (!ctas.length && !funnelSubmitButtons.length) return;
+
+    let hasOfficialBadge = false;
+    const googleRatingMarkup = () =>
+      '<span class="google-rating-mark" aria-hidden="true">G</span><span class="google-rating-copy"><strong>Google</strong><span>5,0 <i aria-hidden="true">★★★★★</i></span></span>';
+
+    const addTrustSignals = (cta, isFunnelSubmit = false) => {
+      let proof = cta.previousElementSibling;
+      const hasExistingGoogleProof = proof?.classList.contains("google-review-widget");
+
+      if (!hasExistingGoogleProof && !proof?.classList.contains("cta-trust-signals")) {
+        proof = document.createElement("div");
+        proof.className = `cta-trust-signals${isFunnelSubmit ? " funnel-cta-trust" : ""}`;
+        proof.innerHTML = `<a class="google-review-button" href="${googleReviewUrl}" target="_blank" rel="noopener noreferrer" aria-label="Google Bewertungen von TrustPlan Finanzkonzepte ansehen">${googleRatingMarkup()}</a>`;
+        cta.insertAdjacentElement("beforebegin", proof);
+      } else if (hasExistingGoogleProof) {
+        proof.classList.add("cta-trust-signals");
+        const googleButton = proof.querySelector(".google-review-button");
+        if (googleButton) {
+          googleButton.href = googleReviewUrl;
+          googleButton.rel = "noopener noreferrer";
+          googleButton.setAttribute("aria-label", "Google Bewertungen von TrustPlan Finanzkonzepte ansehen");
+          googleButton.innerHTML = googleRatingMarkup();
+        }
+      }
+
+      if (proof.querySelector(".cta-provenexpert-seal")) return;
+
+      const isOfficialBadge = !hasOfficialBadge;
+      hasOfficialBadge = true;
+      const provenBadge = document.createElement("a");
+      provenBadge.className = "cta-provenexpert-seal";
+      provenBadge.href = provenProfileUrl;
+      provenBadge.target = "_blank";
+      provenBadge.rel = "noopener noreferrer";
+      provenBadge.setAttribute("aria-label", "ProvenExpert Empfehlungen für TrustPlan Finanzkonzepte ansehen");
+      provenBadge.innerHTML = `<img src="${provenSealUrl}" alt="ProvenExpert Empfehlungssiegel für TrustPlan Finanzkonzepte" loading="lazy" decoding="async">`;
+
+      if (isOfficialBadge) {
+        provenBadge.id = "pe_badge_dtbrfwxc";
+        provenBadge.classList.add("cta-provenexpert-seal-official");
+      }
+
+      proof.append(provenBadge);
+
+      if (!isFunnelSubmit && !cta.parentElement.classList.contains("cta-conversion-group")) {
+        const parent = cta.parentElement;
+        const conversionGroup = document.createElement("div");
+        conversionGroup.className = "cta-conversion-group";
+        parent.insertBefore(conversionGroup, proof);
+        conversionGroup.append(proof, cta);
+      }
+    };
+
+    ctas.forEach((cta) => addTrustSignals(cta));
+    funnelSubmitButtons.forEach((submit) => addTrustSignals(submit, true));
+
+    if (!document.getElementById("pe-badge-dtbrfwxc-script")) {
+      const badgeScript = document.createElement("script");
+      badgeScript.id = "pe-badge-dtbrfwxc-script";
+      badgeScript.src = "https://www.provenexpert.com/badge/recommend.js?id=2xmp3pwp4LGpmLGBjHQAmVUAjpGpkV3A&w=160&key=dtbrfwxc&l=de-de";
+      badgeScript.async = true;
+      document.body.append(badgeScript);
+    }
+  };
+
   const initImageFallbacks = () => {
     document.querySelectorAll("img").forEach((image) => {
       image.addEventListener("error", () => {
@@ -1082,6 +1158,7 @@
     initDecisionCards();
     initProcessJourney();
     initRealEstateVisual();
+    initCtaTrustSignals();
     initImageFallbacks();
     initEscapeToClose();
   });
