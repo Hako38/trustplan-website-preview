@@ -364,6 +364,16 @@ h3 {
   .title-visible .title-type {
     animation-duration: 1050ms;
   }
+
+  .final-cta h2.title-final {
+    line-height: 1.14;
+    padding-bottom: 0.12em;
+    overflow: visible;
+  }
+
+  .title-final .title-word {
+    transform: translateY(0.28em);
+  }
 }
 
 p {
@@ -4026,7 +4036,30 @@ details p {
 
 @media (max-width: 768px) {
   .testimonials-section .card-grid.three {
-    max-width: 390px;
+    display: flex;
+    gap: 14px;
+    width: auto;
+    max-width: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 4px var(--gutter) 18px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .testimonials-section .card-grid.three::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testimonials-section .video-card {
+    flex: 0 0 min(82vw, 320px);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .testimonials-section .video-thumb {
+    width: 100%;
   }
 }
 
@@ -4337,6 +4370,15 @@ details p {
 .contact-google-reviews {
   width: min(100%, 640px);
   margin-top: 30px;
+}
+
+.contact-google-reviews.cta-trust-signals {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.contact-funnel-card > .contact-google-reviews {
+  margin: 20px auto 14px;
 }
 
 .contact-google-heading {
@@ -7533,24 +7575,6 @@ select:focus {
   background: linear-gradient(135deg, #efbd91, #b86a34);
   box-shadow: 0 0 0 5px rgba(196, 122, 63, 0.16), 0 16px 28px rgba(159, 90, 42, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.52);
   transform: scale(1.1);
-}
-
-.process-motion .process-step.is-complete .process-step-marker::after {
-  content: "✓";
-  position: absolute;
-  right: -7px;
-  bottom: -7px;
-  display: grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--white);
-  border-radius: 50%;
-  color: var(--white);
-  background: var(--orange-2);
-  box-shadow: 0 5px 12px rgba(159, 90, 42, 0.24);
-  font-size: 0.68rem;
-  font-weight: 900;
 }
 
 .process-motion .process-visual {

@@ -473,20 +473,21 @@
       const age = Number(form.querySelector('[data-pkv="age"]')?.value || 0);
       const status = form.querySelector('[data-pkv="status"]')?.value || "";
       const income = Number(form.querySelector('[data-pkv="income"]')?.value || 0);
-      let score = 0;
+      const ageCap = age >= 60 ? 0 : age >= 55 ? 15 : age >= 50 ? 45 : age >= 40 ? 70 : 100;
+      let incomeScore = 0;
 
       if (status === "Angestellt") {
-        if (income < 6250) score = 0;
-        else if (income >= 7000) score = 100;
-        else score = age >= 40 ? 70 : 80;
-      } else if (age >= 60) {
-        score = 0;
-      } else if (age >= 55) {
-        score = 15;
+        if (income >= 7000) incomeScore = 100;
+        else if (income >= 6250) incomeScore = 80;
       } else if (["Selbstständig", "Unternehmer"].includes(status)) {
-        score = 30;
+        if (income >= 4000) incomeScore = 100;
+        else if (income >= 3000) incomeScore = 75;
+        else if (income >= 2000) incomeScore = 50;
+        else if (income >= 1500) incomeScore = 25;
+        else incomeScore = 15;
       }
 
+      let score = Math.min(incomeScore, ageCap);
       score = clamp(score, 0, 100);
       output.classList.remove("is-low", "is-medium", "is-high", "is-zero");
       if (score === 0) output.classList.add("is-zero");
@@ -509,15 +510,15 @@
       }
 
       if (eligibility) {
-        eligibility.textContent = status === "Angestellt" && income < 6250 && age < 55
+        eligibility.textContent = status === "Angestellt" && income < 6250
           ? "Bei Angestellten ist ein Wechsel unter 6.250 € Bruttoeinkommen monatlich in der Regel nicht möglich."
           : "";
       }
 
       if (saving) {
-        if (["Selbstständig", "Unternehmer"].includes(status) && age < 55) {
+        if (["Selbstständig", "Unternehmer"].includes(status) && score > 0) {
           saving.textContent = "Highlight: Bei Selbstständigen und Unternehmern kann je nach Situation ein mögliches Einsparpotenzial von ca. 9.000-11.000 € pro Jahr bestehen.";
-        } else if (status === "Angestellt" && income >= 6250 && age < 55) {
+        } else if (status === "Angestellt" && income >= 6250 && score > 0) {
           saving.textContent = "Highlight: Bei Angestellten kann je nach Situation ein mögliches Einsparpotenzial von ca. 3.000-5.000 € pro Jahr bestehen.";
         } else {
           saving.textContent = "Eine genaue Einschätzung ist nur nach individueller Prüfung möglich.";
@@ -1110,8 +1111,12 @@
       }
     };
 
-    ctas.forEach((cta) => addTrustSignals(cta));
-    funnelSubmitButtons.forEach((submit) => addTrustSignals(submit, true));
+    ctas
+      .filter((cta) => !cta.hasAttribute("data-no-cta-trust"))
+      .forEach((cta) => addTrustSignals(cta));
+    funnelSubmitButtons
+      .filter((submit) => !submit.closest(".contact-page"))
+      .forEach((submit) => addTrustSignals(submit, true));
 
     if (!document.getElementById("pe-badge-dtbrfwxc-script")) {
       const badgeScript = document.createElement("script");

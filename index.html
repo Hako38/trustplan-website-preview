@@ -316,9 +316,6 @@
               <div><b aria-hidden="true"><span class="before-copy">−</span><span class="after-copy">+</span></b><span class="before-copy">Unstrukturierte Vorsorge</span><span class="after-copy">Dein Geld arbeitet für dich</span></div>
             </div>
           </div>
-          <div class="center-action reveal">
-            <a class="btn btn-primary" href="./kontakt.html">Zum kostenfreien Erstgespräch</a>
-          </div>
         </div>
       </section>
 
@@ -366,7 +363,7 @@
               <div class="timeline-card-body">
                 <h3>Aus Einzelteilen wird Finanzarchitektur</h3>
                 <p>TrustPlan verbindet Steuern, Versicherungen, Altersvorsorge, Investments und Immobilien zu einer Strategie, die zu deiner Situation passt – unabhängig von Bank oder Versicherung.</p>
-                <a class="btn btn-primary btn-inline-cta" href="./kontakt.html">Zum kostenfreien Erstgespräch</a>
+                <a class="btn btn-primary btn-inline-cta" href="./kontakt.html" data-no-cta-trust>Zum kostenfreien Erstgespräch</a>
               </div>
             </article>
           </div>
@@ -446,7 +443,7 @@
             </article>
           </div>
           <div class="center-action reveal">
-            <a class="btn btn-primary" href="./kontakt.html">Zum kostenfreien Erstgespräch</a>
+            <a class="btn btn-primary" href="./kontakt.html" data-no-cta-trust>Zum kostenfreien Erstgespräch</a>
           </div>
         </div>
       </section>
@@ -513,6 +510,15 @@
           </div>
           <div class="card-grid three">
             <article class="video-card reveal">
+              <button class="video-thumb" type="button" data-video="/assets/videos/testimonial-3.mp4" aria-label="Testimonial 3 ansehen">
+                <img src="./assets/images/testimonial-sefa-kara-thumb.webp" alt="Video-Vorschau Sefa Kara Bewertung" loading="lazy" decoding="async" width="315" height="560">
+                <span>Video ansehen</span>
+              </button>
+              <h3>Sefa Kara, 32 Jahre</h3>
+              <p><strong>Geschäftsinhaber, Kara Gebäudeservice</strong></p>
+              <p>"Ich habe verstanden, welche Möglichkeiten es als Unternehmer gibt, sinnvoll vorzusorgen und gleichzeitig steuerliche Vorteile zu nutzen."</p>
+            </article>
+            <article class="video-card reveal">
               <button class="video-thumb" type="button" data-video="/assets/videos/testimonial-1.mp4" aria-label="Testimonial 1 ansehen">
                 <img src="./assets/images/testimonial-laura-zepic-thumb.webp" alt="Video-Vorschau Laura Zepic Bewertung" loading="lazy" decoding="async" width="315" height="560">
                 <span>Video ansehen</span>
@@ -529,15 +535,6 @@
               <h3>Melih Kandemir, 29 Jahre</h3>
               <p><strong>Facharzt für innere Medizin, Geschäftsinhaber MeliMedics</strong></p>
               <p>"Wir konnten mein Unternehmen umstrukturieren, um steuerlich besser dazustehen."</p>
-            </article>
-            <article class="video-card reveal">
-              <button class="video-thumb" type="button" data-video="/assets/videos/testimonial-3.mp4" aria-label="Testimonial 3 ansehen">
-                <img src="./assets/images/testimonial-sefa-kara-thumb.webp" alt="Video-Vorschau Sefa Kara Bewertung" loading="lazy" decoding="async" width="315" height="560">
-                <span>Video ansehen</span>
-              </button>
-              <h3>Sefa Kara, 32 Jahre</h3>
-              <p><strong>Geschäftsinhaber, Kara Gebäudeservice</strong></p>
-              <p>"Ich habe verstanden, welche Möglichkeiten es als Unternehmer gibt, sinnvoll vorzusorgen und gleichzeitig steuerliche Vorteile zu nutzen."</p>
             </article>
           </div>
           <div class="review-marquee reveal" aria-label="Google Bewertungen">
@@ -706,49 +703,37 @@
             <div class="funnel-progress" aria-hidden="true"><span data-funnel-progress></span></div>
 
             <div class="funnel-step active" data-step="1">
-              <h3>Wie alt bist du?</h3>
+              <h3>Was beschreibt deine aktuelle Situation am besten?</h3>
               <div class="option-grid">
-                <label><input type="radio" name="age" value="18-30" required> 18-30</label>
-                <label><input type="radio" name="age" value="31-40"> 31-40</label>
-                <label><input type="radio" name="age" value="41-50"> 41-50</label>
-                <label><input type="radio" name="age" value="50+"> 50+</label>
+                <label><input type="radio" name="situation" value="Gutverdienender Angestellter" required> Gutverdienender Angestellter</label>
+                <label><input type="radio" name="situation" value="Selbstständig"> Selbstständig</label>
+                <label><input type="radio" name="situation" value="Unternehmer"> Unternehmer</label>
               </div>
             </div>
 
             <div class="funnel-step" data-step="2">
-              <h3>Wie lautet dein Berufsstatus?</h3>
-              <div class="option-grid">
-                <label><input type="radio" name="status" value="Azubi/Student" required> Azubi/Student</label>
-                <label><input type="radio" name="status" value="Angestellt"> Angestellt</label>
-                <label><input type="radio" name="status" value="Selbständig/Unternehmer"> Selbständig/Unternehmer</label>
-                <label><input type="radio" name="status" value="Beamter"> Beamter</label>
-                <label><input type="radio" name="status" value="Sonstiges"> Sonstiges</label>
-              </div>
-            </div>
-
-            <div class="funnel-step" data-step="3">
-              <h3>Monatliches Netto-Einkommen</h3>
+              <h3>Wie hoch ist dein monatliches Netto-Einkommen ungefähr?</h3>
               <div class="option-grid">
                 <label><input type="radio" name="income" value="Unter 2500" required> Unter 2.500 EUR</label>
                 <label><input type="radio" name="income" value="2500-4000"> 2.500-4.000 EUR</label>
                 <label><input type="radio" name="income" value="4000-6000"> 4.000-6.000 EUR</label>
-                <label><input type="radio" name="income" value="6000+"> 6.000 EUR+</label>
+                <label><input type="radio" name="income" value="6000+"> Über 6.000 EUR</label>
               </div>
             </div>
 
-            <div class="funnel-step" data-step="4">
-              <h3>Was interessiert dich?</h3>
+            <div class="funnel-step" data-step="3">
+              <h3>Welche Themen sind für dich aktuell wichtig?</h3>
               <div class="option-grid" data-required-checkboxes>
                 <label><input type="checkbox" name="interest[]" value="Steuern"> Steuern</label>
-                <label><input type="checkbox" name="interest[]" value="Investments"> Investments</label>
-                <label><input type="checkbox" name="interest[]" value="Immobilien"> Immobilien</label>
                 <label><input type="checkbox" name="interest[]" value="Versicherungen"> Versicherungen</label>
                 <label><input type="checkbox" name="interest[]" value="Altersvorsorge"> Altersvorsorge</label>
+                <label><input type="checkbox" name="interest[]" value="Investments"> Investments</label>
+                <label><input type="checkbox" name="interest[]" value="Immobilien"> Immobilien</label>
                 <label><input type="checkbox" name="interest[]" value="PKV"> PKV</label>
               </div>
             </div>
 
-            <div class="funnel-step" data-step="5">
+            <div class="funnel-step" data-step="4">
               <h3>Deine Kontaktdaten</h3>
               <div class="field-grid">
                 <label>Name <input type="text" name="name" autocomplete="name" required></label>
@@ -810,7 +795,7 @@
           <h2>Warte nicht, bis du jahrelang Potenzial verschenkst</h2>
           <p>Wenn du gut verdienst, solltest du wissen, ob deine Finanzen wirklich effizient aufgestellt sind.</p>
           <div class="final-cta-media">
-            <img src="./assets/images/enes-sarikaya-portrait.webp" alt="Enes Sarikaya im Beratungsgespräch" loading="lazy" decoding="async" width="1300" height="731">
+            <img src="./assets/images/enes-sarikaya-beratungsgespraech.jpg" alt="Enes Sarikaya im persönlichen Beratungsgespräch" loading="lazy" decoding="async" width="1600" height="849">
           </div>
           <a class="btn btn-primary" href="./kontakt.html">Zum kostenfreien Erstgespräch</a>
         </div>
