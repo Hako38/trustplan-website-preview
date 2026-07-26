@@ -8387,3 +8387,30 @@ select:focus {
     transform: none;
   }
 }
+
+/* Keep the homepage funnel compact on small screens. */
+@media (max-width: 768px) {
+  .funnel-section .funnel-grid {
+    align-items: start;
+    gap: 12px;
+  }
+
+  .funnel-section .funnel-trust-signals {
+    width: 100%;
+    justify-content: flex-start;
+    margin: 10px 0 0;
+  }
+
+  .funnel-section .funnel {
+    align-self: start;
+    min-height: 0;
+  }
+
+  .funnel-section .funnel-step.active {
+    min-height: 0;
+  }
+
+  .funnel-section .funnel-actions {
+    margin-top: 14px;
+  }
+}
