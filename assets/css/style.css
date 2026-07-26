@@ -4401,18 +4401,9 @@ details p {
   font-weight: 750;
 }
 
-.contact-google-reviews {
-  width: min(100%, 640px);
-  margin-top: 30px;
-}
-
-.contact-google-reviews.cta-trust-signals {
-  width: fit-content;
-  max-width: 100%;
-}
-
-.contact-funnel-card > .contact-google-reviews {
-  margin: 20px auto 14px;
+.funnel-trust-signals {
+  justify-content: flex-start;
+  margin: 22px 0 0;
 }
 
 .contact-google-heading {
