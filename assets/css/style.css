@@ -855,6 +855,63 @@ ul {
   object-fit: contain;
 }
 
+.cta-proseal-widget {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 58px;
+  min-width: 58px;
+  height: 58px;
+  min-height: 58px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+.cta-proseal-widget [class*="pe-"] {
+  max-width: 100%;
+}
+
+.cta-proseal-fallback {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-content: center;
+  color: #1f1f1f;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 0.88;
+  text-align: center;
+  text-decoration: none;
+}
+
+.cta-proseal-fallback span {
+  display: grid;
+  width: 15px;
+  height: 15px;
+  place-items: center;
+  justify-self: center;
+  margin-bottom: 3px;
+  border-radius: 50%;
+  background: #d0b662;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.cta-proseal-fallback strong,
+.cta-proseal-fallback em {
+  display: block;
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.cta-proseal-fallback em {
+  font-size: 0.66rem;
+  font-weight: 500;
+}
+
 .cta-trust-signals #pe_badge_dtbrfwxc,
 .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-outer,
 .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-inner,
@@ -894,6 +951,7 @@ ul {
   }
 
   .cta-provenexpert-seal,
+  .cta-proseal-widget,
   .cta-trust-signals #pe_badge_dtbrfwxc,
   .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-outer,
   .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-inner,
@@ -7967,7 +8025,7 @@ select:focus {
 
   .leak-port {
     display: block;
-    width: clamp(62px, 20.5vw, 88px);
+    width: clamp(68px, 21.5vw, 94px);
     font-size: clamp(0.48rem, 1.95vw, 0.61rem);
     line-height: 1.16;
   }
@@ -8077,21 +8135,41 @@ select:focus {
   }
 
   .leak-port-card {
-    grid-template-columns: 14px minmax(0, 1fr);
-    gap: 3px;
-    padding: 4px 3px;
+    grid-template-columns: 15px minmax(0, 1fr);
+    align-items: center;
+    gap: 4px;
+    padding: 4px 2px;
   }
 
   .leak-port-card em {
+    display: block;
+    min-width: 0;
     font-weight: 850;
     line-height: 1.15;
+    text-align: center;
+  }
+
+  /* Keep exactly one copy visible in each side label on compact screens. */
+  .leak-port-card > em.after-copy,
+  .leak-port-card > .leak-sign .after-copy {
+    display: none !important;
+  }
+
+  .leak-system.is-after .leak-port-card > em.before-copy,
+  .leak-system.is-after .leak-port-card > .leak-sign .before-copy {
+    display: none !important;
+  }
+
+  .leak-system.is-after .leak-port-card > em.after-copy,
+  .leak-system.is-after .leak-port-card > .leak-sign .after-copy {
+    display: block !important;
   }
 
   /* Keep both icon columns facing the central tank. */
   .leak-port-one .leak-port-card,
   .leak-port-three .leak-port-card,
   .leak-port-five .leak-port-card {
-    grid-template-columns: minmax(0, 1fr) 14px;
+    grid-template-columns: minmax(0, 1fr) 15px;
   }
 
   .leak-port-one .leak-sign,
@@ -8106,19 +8184,22 @@ select:focus {
   .leak-port-five .leak-port-card em {
     grid-column: 1;
     grid-row: 1;
-    text-align: right;
-  }
-
-  .leak-port-one .leak-port-card em {
-    transform: translateY(-4px);
   }
 
   .leak-port-one .leak-amount,
   .leak-port-three .leak-amount,
   .leak-port-five .leak-amount {
-    width: auto;
-    margin-left: 0;
-    text-align: right;
+    width: 100%;
+    margin: 2px 0 0;
+    text-align: center;
+  }
+
+  .leak-port-two .leak-amount,
+  .leak-port-four .leak-amount,
+  .leak-port-six .leak-amount {
+    width: 100%;
+    margin: 2px 0 0;
+    text-align: center;
   }
 
   .leak-sign {
@@ -8128,9 +8209,9 @@ select:focus {
   }
 
   .leak-amount {
-    width: calc(100% + 17px);
+    width: 100%;
     display: block;
-    margin: 2px 0 0 -17px;
+    margin: 2px 0 0;
     color: var(--red);
     font-size: clamp(0.63rem, 2.8vw, 0.75rem);
     font-weight: 900;
@@ -8153,6 +8234,68 @@ select:focus {
     line-height: 1.1;
     text-align: center;
     white-space: nowrap;
+  }
+
+  /* Mobile state guard: a port may only show one label variant at a time. */
+  .leak-port-card > .before-copy,
+  .leak-port-card > .after-copy,
+  .leak-port-card > .leak-sign > .before-copy,
+  .leak-port-card > .leak-sign > .after-copy {
+    display: none !important;
+  }
+
+  .leak-system:not(.is-after) .leak-port-card > .before-copy {
+    display: block !important;
+  }
+
+  .leak-system:not(.is-after) .leak-port-card > .leak-sign > .before-copy {
+    display: inline !important;
+  }
+
+  .leak-system.is-after .leak-port-card > .after-copy {
+    display: block !important;
+  }
+
+  .leak-system.is-after .leak-port-card > .leak-sign > .after-copy {
+    display: inline !important;
+  }
+
+  /* Keep the compact three-column composition balanced on narrow screens. */
+  .leak-vessel {
+    width: 44%;
+  }
+
+  .leak-port {
+    width: clamp(72px, 23vw, 100px);
+    font-size: clamp(0.52rem, 2.05vw, 0.63rem);
+    line-height: 1.08;
+  }
+
+  .leak-port-one,
+  .leak-port-three,
+  .leak-port-five {
+    right: calc(100% + 5px);
+  }
+
+  .leak-port-two,
+  .leak-port-four,
+  .leak-port-six {
+    left: calc(100% + 5px);
+  }
+
+  .leak-port-card {
+    gap: 3px;
+    padding: 3px 1px;
+  }
+
+  .leak-port-card em {
+    overflow-wrap: anywhere;
+    line-height: 1.08;
+  }
+
+  .leak-amount {
+    margin-top: 1px;
+    font-size: clamp(0.56rem, 2.4vw, 0.67rem);
   }
 }
 

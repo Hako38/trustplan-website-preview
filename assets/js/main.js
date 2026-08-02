@@ -1052,6 +1052,8 @@
     const googleReviewUrl = "https://www.google.com/search?sca_esv=d3caeb1c7ee2fe72&sxsrf=APpeQntG4bvHBeHpn_8wjr--iLrekEF3Ow:1783502486710&q=TrustPlan+Finanzkonzepte+Rezensionen&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_063R5fz_pcASmtWEHIdpiaSfcM192M0TLqE7zl8o7d3tzkHORbM1gDWHCwkmUI0fpfohoU%3D&uds=AJ5uw195omnGJ76DOhPThDoE1qc-TyXd6lywgsi6Vb_e4SkCA7IdnO1z1lFGWMvnApg1ueYqSzrmG7tlu2X8tsATW0WiBTuCm3t05FpUq-0bWUEDDY4g5RD6YL__OtQOf-z7awpuQqtB5q7vzalq4VGApnEAzEMNvw&sa=X&ved=2ahUKEwidlLTB4MKVAxXAX_EDHVl-AykQ3PALegQILxAF&biw=1440&bih=778&dpr=2";
     const provenProfileUrl = "https://www.provenexpert.com/trustplan-finanzkonzepte/?utm_source=Badge&utm_medium=Badge&utm_campaign=Badge";
     const provenSealUrl = "https://www.provenexpert.com/profile/de-de/awards-2026/recommendation.svg";
+    const proSealProfileUrl = "https://www.provenexpert.com/trustplan-finanzkonzepte/?utm_source=seals&utm_campaign=embedded-proseal&utm_medium=profile&utm_content=0ada0ea9-c05b-4b7b-ae3f-1996b676e2fc";
+    const proSealWidgetId = "0ada0ea9-c05b-4b7b-ae3f-1996b676e2fc";
     const ctas = Array.from(document.querySelectorAll('a.btn[href="./kontakt.html"]')).filter(
       (cta) => !cta.classList.contains("nav-cta") && !cta.closest(".contact-google-reviews")
     );
@@ -1083,24 +1085,32 @@
         }
       }
 
-      if (proof.querySelector(".cta-provenexpert-seal")) return;
+      if (!proof.querySelector(".cta-provenexpert-seal")) {
+        const isOfficialBadge = !hasOfficialBadge;
+        hasOfficialBadge = true;
+        const provenBadge = document.createElement("a");
+        provenBadge.className = "cta-provenexpert-seal";
+        provenBadge.href = provenProfileUrl;
+        provenBadge.target = "_blank";
+        provenBadge.rel = "noopener noreferrer";
+        provenBadge.setAttribute("aria-label", "ProvenExpert Empfehlungen für TrustPlan Finanzkonzepte ansehen");
+        provenBadge.innerHTML = `<img src="${provenSealUrl}" alt="ProvenExpert Empfehlungssiegel für TrustPlan Finanzkonzepte" loading="lazy" decoding="async">`;
 
-      const isOfficialBadge = !hasOfficialBadge;
-      hasOfficialBadge = true;
-      const provenBadge = document.createElement("a");
-      provenBadge.className = "cta-provenexpert-seal";
-      provenBadge.href = provenProfileUrl;
-      provenBadge.target = "_blank";
-      provenBadge.rel = "noopener noreferrer";
-      provenBadge.setAttribute("aria-label", "ProvenExpert Empfehlungen für TrustPlan Finanzkonzepte ansehen");
-      provenBadge.innerHTML = `<img src="${provenSealUrl}" alt="ProvenExpert Empfehlungssiegel für TrustPlan Finanzkonzepte" loading="lazy" decoding="async">`;
+        if (isOfficialBadge) {
+          provenBadge.id = "pe_badge_dtbrfwxc";
+          provenBadge.classList.add("cta-provenexpert-seal-official");
+        }
 
-      if (isOfficialBadge) {
-        provenBadge.id = "pe_badge_dtbrfwxc";
-        provenBadge.classList.add("cta-provenexpert-seal-official");
+        proof.append(provenBadge);
       }
 
-      proof.append(provenBadge);
+      if (!proof.querySelector(".cta-proseal-widget")) {
+        const proSeal = document.createElement("div");
+        proSeal.className = "cta-proseal-widget";
+        proSeal.dataset.prosealWidget = "true";
+        proSeal.innerHTML = `<a class="cta-proseal-fallback" href="${proSealProfileUrl}" target="_blank" rel="noopener noreferrer" aria-label="ProvenExpert Bewertungen für TrustPlan Finanzkonzepte ansehen"><span aria-hidden="true">✓</span><strong>Proven</strong><em>Expert</em></a><noscript><a href="${proSealProfileUrl}" target="_blank" rel="noopener noreferrer" title="Kundenbewertungen für TrustPlan Finanzkonzepte">Mehr erfahren</a></noscript>`;
+        proof.append(proSeal);
+      }
 
       if (!isFunnelSubmit && !cta.parentElement.classList.contains("cta-conversion-group")) {
         const parent = cta.parentElement;
@@ -1118,12 +1128,48 @@
       .filter((submit) => !submit.closest(".contact-page"))
       .forEach((submit) => addTrustSignals(submit, true));
 
-    if (!document.getElementById("pe-badge-dtbrfwxc-script")) {
-      const badgeScript = document.createElement("script");
-      badgeScript.id = "pe-badge-dtbrfwxc-script";
-      badgeScript.src = "https://www.provenexpert.com/badge/recommend.js?id=2xmp3pwp4LGpmLGBjHQAmVUAjpGpkV3A&w=160&key=dtbrfwxc&l=de-de";
-      badgeScript.async = true;
-      document.body.append(badgeScript);
+    document.querySelectorAll(".cta-trust-signals").forEach((proof) => {
+      if (proof.querySelector(".cta-proseal-widget")) return;
+      const proSeal = document.createElement("div");
+      proSeal.className = "cta-proseal-widget";
+      proSeal.dataset.prosealWidget = "true";
+      proSeal.innerHTML = `<a class="cta-proseal-fallback" href="${proSealProfileUrl}" target="_blank" rel="noopener noreferrer" aria-label="ProvenExpert Bewertungen für TrustPlan Finanzkonzepte ansehen"><span aria-hidden="true">✓</span><strong>Proven</strong><em>Expert</em></a><noscript><a href="${proSealProfileUrl}" target="_blank" rel="noopener noreferrer" title="Kundenbewertungen für TrustPlan Finanzkonzepte">Mehr erfahren</a></noscript>`;
+      proof.append(proSeal);
+    });
+
+    const renderProSeals = () => {
+      if (!window.provenExpert?.proSeal) return;
+
+      document.querySelectorAll("[data-proseal-widget]").forEach((widget, index) => {
+        if (widget.dataset.prosealLoaded === "true") return;
+        widget.id = `proSealWidget-${index + 1}`;
+        window.provenExpert.proSeal({
+          widgetId: proSealWidgetId,
+          language: "de-DE",
+          usePageLanguage: false,
+          bannerColor: "#444444",
+          textColor: "#FFFFFF",
+          showBackPage: true,
+          showReviews: true,
+          hideDate: true,
+          hideName: false,
+          googleStars: true,
+          displayReviewerLastName: false,
+          embeddedSelector: `#${widget.id}`
+        });
+        widget.dataset.prosealLoaded = "true";
+      });
+    };
+
+    if (window.provenExpert?.proSeal) {
+      renderProSeals();
+    } else if (!document.getElementById("proseal-widget-script")) {
+      const proSealScript = document.createElement("script");
+      proSealScript.id = "proseal-widget-script";
+      proSealScript.src = "https://s.provenexpert.net/seals/proseal-v2.js";
+      proSealScript.async = true;
+      proSealScript.addEventListener("load", renderProSeals, { once: true });
+      document.head.append(proSealScript);
     }
   };
 
