@@ -20,6 +20,24 @@
   --header-height: 78px;
 }
 
+/* Final lock: third-party badge images must never set the CTA layout size. */
+.cta-trust-signals--official > * {
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.cta-trust-signals--official > a,
+.cta-trust-signals--official img,
+.cta-trust-signals--official svg,
+.cta-trust-signals--official iframe {
+  display: block !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -288,6 +306,10 @@ h3 {
 
 .title-final .title-word {
   transform: translateY(0.62em);
+}
+
+.title-final.title-visible .title-word {
+  transform: translateY(0) scale(1);
 }
 
 .title-anim.title-visible,
@@ -930,6 +952,66 @@ ul {
   transform: none !important;
 }
 
+/* Official Google + ProvenExpert review and award group. */
+.cta-trust-signals--official {
+  --official-seal-height: 62px;
+  justify-content: flex-start;
+  width: min(100%, 620px);
+  margin: 0;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.cta-trust-signals--official .google-review-button {
+  min-width: 158px;
+  min-height: var(--official-seal-height);
+  height: var(--official-seal-height);
+  padding: 7px 12px;
+}
+
+.cta-provenexpert-official-badge,
+.cta-provenexpert-award {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--official-seal-height);
+  min-width: var(--official-seal-height);
+  height: var(--official-seal-height);
+  line-height: 0;
+}
+
+.cta-provenexpert-official-badge img,
+.cta-provenexpert-award img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+}
+
+.cta-provenexpert-review-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: calc(var(--official-seal-height) * 1.2);
+  min-width: calc(var(--official-seal-height) * 1.2);
+  height: var(--official-seal-height);
+  overflow: hidden;
+  border-radius: 10px;
+  line-height: 0;
+  box-shadow: 0 8px 18px rgba(3, 20, 43, 0.12);
+}
+
+.cta-provenexpert-review-seal img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
 @media (max-width: 480px) {
   .cta-trust-signals {
     gap: 8px;
@@ -950,6 +1032,17 @@ ul {
     padding: 7px 10px;
   }
 
+  .cta-trust-signals--official {
+    --official-seal-height: 52px;
+    justify-content: flex-start;
+    gap: 7px;
+  }
+
+  .cta-trust-signals--official .google-review-button {
+    min-width: 140px;
+    padding: 6px 10px;
+  }
+
   .cta-provenexpert-seal,
   .cta-proseal-widget,
   .cta-trust-signals #pe_badge_dtbrfwxc,
@@ -961,6 +1054,210 @@ ul {
   .cta-trust-signals #pe_badge_dtbrfwxc .pe-flip-back img {
     width: 52px !important;
     height: 52px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .cta-trust-signals--official {
+    --official-seal-height: 48px;
+    gap: 6px;
+  }
+
+  .cta-trust-signals--official .google-review-button {
+    min-width: 132px;
+    padding-inline: 8px;
+  }
+
+  .cta-trust-signals--official .google-rating-mark {
+    width: 26px;
+    height: 26px;
+    font-size: 1.7rem;
+  }
+
+  .cta-trust-signals--official .google-rating-copy strong {
+    font-size: 0.72rem;
+  }
+
+  .cta-trust-signals--official .google-rating-copy span {
+    font-size: 0.65rem;
+  }
+}
+
+/* Final responsive size lock for all CTA review marks. */
+.cta-trust-signals--official {
+  --official-seal-height: 38px;
+  gap: 5px !important;
+}
+
+.cta-trust-signals--official .google-review-button {
+  inline-size: 118px !important;
+  min-inline-size: 118px !important;
+  max-inline-size: 118px !important;
+  block-size: 38px !important;
+  min-block-size: 38px !important;
+  max-block-size: 38px !important;
+}
+
+.cta-trust-signals--official .cta-provenexpert-official-badge {
+  inline-size: 38px !important;
+  min-inline-size: 38px !important;
+  max-inline-size: 38px !important;
+  block-size: 38px !important;
+  min-block-size: 38px !important;
+  max-block-size: 38px !important;
+}
+
+.cta-trust-signals--official .cta-provenexpert-review-seal {
+  inline-size: 46px !important;
+  min-inline-size: 46px !important;
+  max-inline-size: 46px !important;
+  block-size: 38px !important;
+  min-block-size: 38px !important;
+  max-block-size: 38px !important;
+}
+
+.cta-trust-signals--official .cta-provenexpert-official-badge img,
+.cta-trust-signals--official .cta-provenexpert-review-seal img {
+  display: block !important;
+  inline-size: 100% !important;
+  max-inline-size: 100% !important;
+  block-size: 100% !important;
+  max-block-size: 100% !important;
+  object-fit: contain !important;
+}
+
+@media (max-width: 640px) {
+  .cta-trust-signals--official {
+    --official-seal-height: 30px;
+    gap: 4px !important;
+  }
+
+  .cta-trust-signals--official .google-review-button {
+    inline-size: 96px !important;
+    min-inline-size: 96px !important;
+    max-inline-size: 96px !important;
+    block-size: 30px !important;
+    min-block-size: 30px !important;
+    max-block-size: 30px !important;
+  }
+
+  .cta-trust-signals--official .cta-provenexpert-official-badge {
+    inline-size: 30px !important;
+    min-inline-size: 30px !important;
+    max-inline-size: 30px !important;
+    block-size: 30px !important;
+    min-block-size: 30px !important;
+    max-block-size: 30px !important;
+  }
+
+  .cta-trust-signals--official .cta-provenexpert-review-seal {
+    inline-size: 36px !important;
+    min-inline-size: 36px !important;
+    max-inline-size: 36px !important;
+    block-size: 30px !important;
+    min-block-size: 30px !important;
+    max-block-size: 30px !important;
+  }
+}
+
+/* Final CTA trust-mark sizing: external image dimensions must never affect layout. */
+.cta-trust-signals--official,
+.cta-trust-signals--official.funnel-trust-signals {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  width: fit-content !important;
+  max-width: calc(100vw - 32px) !important;
+  height: 34px !important;
+  min-height: 0 !important;
+  max-height: 34px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  line-height: 0 !important;
+}
+
+.cta-trust-signals--official > * {
+  display: flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 34px !important;
+  min-height: 0 !important;
+  max-height: 34px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  line-height: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.cta-trust-signals--official > .google-review-button {
+  flex-basis: 106px !important;
+  width: 106px !important;
+  min-width: 106px !important;
+  max-width: 106px !important;
+}
+
+.cta-trust-signals--official > .cta-provenexpert-official-badge {
+  flex-basis: 34px !important;
+  width: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+}
+
+.cta-trust-signals--official > .cta-provenexpert-review-seal {
+  flex-basis: 42px !important;
+  width: 42px !important;
+  min-width: 42px !important;
+  max-width: 42px !important;
+}
+
+.cta-trust-signals--official > a > img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+@media (max-width: 640px) {
+  .cta-trust-signals--official,
+  .cta-trust-signals--official.funnel-trust-signals {
+    gap: 4px !important;
+    height: 28px !important;
+    max-height: 28px !important;
+  }
+
+  .cta-trust-signals--official > * {
+    height: 28px !important;
+    max-height: 28px !important;
+  }
+
+  .cta-trust-signals--official > .google-review-button {
+    flex-basis: 90px !important;
+    width: 90px !important;
+    min-width: 90px !important;
+    max-width: 90px !important;
+  }
+
+  .cta-trust-signals--official > .cta-provenexpert-official-badge {
+    flex-basis: 28px !important;
+    width: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+  }
+
+  .cta-trust-signals--official > .cta-provenexpert-review-seal {
+    flex-basis: 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
   }
 }
 
@@ -4096,6 +4393,14 @@ details p {
   display: none;
 }
 
+@media (min-width: 769px) {
+  .testimonials-section .card-grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    max-width: 1120px;
+  }
+}
+
 @media (max-width: 768px) {
   .testimonial-swipe-hint {
     display: inline-flex;
@@ -4829,7 +5134,23 @@ details p {
 
 .final-cta h2 {
   color: var(--white);
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 1.5rem;
+}
+
+.final-cta h2.title-final {
+  font-size: clamp(2.1rem, 4.2vw, 4rem);
+  line-height: 1.16;
+  margin-bottom: 2.2rem;
+  overflow: visible;
+  padding-bottom: 0.12em;
+  text-wrap: balance;
+}
+
+.final-cta h2.title-final .title-word {
+  line-height: 1.16;
 }
 
 .final-cta p {
@@ -8556,4 +8877,472 @@ select:focus {
   .funnel-section .funnel-actions {
     margin-top: 14px;
   }
+}
+
+/* Keep all official trust marks compact and visually consistent. */
+.cta-trust-signals--official {
+  --official-seal-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.cta-trust-signals--official > a {
+  display: block;
+  flex: 0 0 auto;
+  height: var(--official-seal-height) !important;
+  max-height: var(--official-seal-height) !important;
+  min-width: 0;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.cta-trust-signals--official .google-review-button {
+  width: 144px !important;
+  min-width: 144px !important;
+  height: var(--official-seal-height) !important;
+  min-height: var(--official-seal-height) !important;
+  padding: 7px 12px !important;
+  color: var(--navy) !important;
+}
+
+.cta-trust-signals--official .cta-provenexpert-official-badge {
+  width: var(--official-seal-height) !important;
+  min-width: var(--official-seal-height) !important;
+  border-radius: 10px;
+}
+
+.cta-trust-signals--official .cta-provenexpert-review-seal {
+  width: calc(var(--official-seal-height) * 1.2) !important;
+  min-width: calc(var(--official-seal-height) * 1.2) !important;
+  border-radius: 10px;
+}
+
+.cta-trust-signals--official .cta-provenexpert-official-badge img,
+.cta-trust-signals--official .cta-provenexpert-review-seal img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  object-position: center;
+}
+
+@media (max-width: 640px) {
+  .cta-trust-signals--official {
+    --official-seal-height: 42px;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .cta-trust-signals--official .google-review-button {
+    width: 118px !important;
+    min-width: 118px !important;
+    padding: 5px 9px !important;
+  }
+
+  .cta-trust-signals--official .google-rating-mark {
+    font-size: 26px !important;
+  }
+
+  .cta-trust-signals--official .google-rating-copy strong {
+    font-size: 14px !important;
+  }
+
+  .cta-trust-signals--official .google-rating-copy span {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .cta-trust-signals--official {
+    --official-seal-height: 38px;
+    gap: 5px;
+  }
+
+  .cta-trust-signals--official .google-review-button {
+    width: 108px !important;
+    min-width: 108px !important;
+  }
+}
+
+/* Hard cap external review marks so remote ProvenExpert assets stay compact. */
+.cta-trust-signals--official {
+  --official-seal-height: 44px;
+  display: flex !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  min-height: var(--official-seal-height) !important;
+  margin-inline: auto;
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+.cta-trust-signals--official > a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  width: var(--official-seal-height) !important;
+  min-width: var(--official-seal-height) !important;
+  max-width: var(--official-seal-height) !important;
+  height: var(--official-seal-height) !important;
+  min-height: var(--official-seal-height) !important;
+  max-height: var(--official-seal-height) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.cta-trust-signals--official .google-review-button {
+  width: 132px !important;
+  min-width: 132px !important;
+  max-width: 132px !important;
+  height: var(--official-seal-height) !important;
+  min-height: var(--official-seal-height) !important;
+  max-height: var(--official-seal-height) !important;
+}
+
+.cta-trust-signals--official .cta-provenexpert-review-seal {
+  width: 52px !important;
+  min-width: 52px !important;
+  max-width: 52px !important;
+}
+
+.cta-trust-signals--official .cta-provenexpert-official-badge img,
+.cta-trust-signals--official .cta-provenexpert-review-seal img {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+@media (max-width: 640px) {
+  .cta-trust-signals--official {
+    --official-seal-height: 36px;
+    min-height: var(--official-seal-height) !important;
+    gap: 5px !important;
+    justify-content: flex-start !important;
+  }
+
+  .cta-trust-signals--official .google-review-button {
+    width: 112px !important;
+    min-width: 112px !important;
+    max-width: 112px !important;
+    padding: 4px 8px !important;
+  }
+
+  .cta-trust-signals--official .cta-provenexpert-review-seal {
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+  }
+
+  .cta-trust-signals--official .google-rating-mark { font-size: 22px !important; }
+  .cta-trust-signals--official .google-rating-copy strong { font-size: 12px !important; }
+  .cta-trust-signals--official .google-rating-copy span { font-size: 10px !important; }
+}
+
+@media (max-width: 360px) {
+  .cta-trust-signals--official { --official-seal-height: 32px; gap: 4px !important; }
+
+  .cta-trust-signals--official .google-review-button {
+    width: 104px !important;
+    min-width: 104px !important;
+    max-width: 104px !important;
+  }
+
+  .cta-trust-signals--official .cta-provenexpert-review-seal {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+  }
+}
+
+/* Final responsive size lock: keep all CTA trust marks compact. */
+.cta-trust-signals--official {
+  --official-seal-height: 38px;
+  gap: 5px !important;
+}
+
+/* Absolute size lock for externally served trust badges. */
+.cta-trust-signals--official,
+.cta-trust-signals--official > a {
+  box-sizing: border-box !important;
+}
+
+.cta-trust-signals--official > .google-review-button {
+  flex: 0 0 106px !important;
+  inline-size: 106px !important;
+  block-size: 34px !important;
+  min-inline-size: 0 !important;
+  min-block-size: 0 !important;
+  max-inline-size: 106px !important;
+  max-block-size: 34px !important;
+}
+
+.cta-trust-signals--official > .cta-provenexpert-official-badge {
+  flex: 0 0 34px !important;
+  inline-size: 34px !important;
+  block-size: 34px !important;
+  min-inline-size: 0 !important;
+  min-block-size: 0 !important;
+  max-inline-size: 34px !important;
+  max-block-size: 34px !important;
+  aspect-ratio: 1 !important;
+  overflow: hidden !important;
+}
+
+.cta-trust-signals--official > .cta-provenexpert-review-seal {
+  flex: 0 0 42px !important;
+  inline-size: 42px !important;
+  block-size: 34px !important;
+  min-inline-size: 0 !important;
+  min-block-size: 0 !important;
+  max-inline-size: 42px !important;
+  max-block-size: 34px !important;
+  overflow: hidden !important;
+}
+
+.cta-trust-signals--official > a > img {
+  display: block !important;
+  inline-size: 100% !important;
+  block-size: 100% !important;
+  min-inline-size: 0 !important;
+  min-block-size: 0 !important;
+  max-inline-size: 100% !important;
+  max-block-size: 100% !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+@media (max-width: 640px) {
+  .cta-trust-signals--official {
+    gap: 4px !important;
+  }
+
+  .cta-trust-signals--official > .google-review-button {
+    flex-basis: 90px !important;
+    inline-size: 90px !important;
+    block-size: 28px !important;
+    max-inline-size: 90px !important;
+    max-block-size: 28px !important;
+  }
+
+  .cta-trust-signals--official > .cta-provenexpert-official-badge {
+    flex-basis: 28px !important;
+    inline-size: 28px !important;
+    block-size: 28px !important;
+    max-inline-size: 28px !important;
+    max-block-size: 28px !important;
+  }
+
+  .cta-trust-signals--official > .cta-provenexpert-review-seal {
+    flex-basis: 36px !important;
+    inline-size: 36px !important;
+    block-size: 28px !important;
+    max-inline-size: 36px !important;
+    max-block-size: 28px !important;
+  }
+}
+
+.cta-trust-signals--official .google-review-button {
+  width: 118px !important;
+  min-width: 118px !important;
+  max-width: 118px !important;
+}
+
+.cta-trust-signals--official .cta-provenexpert-official-badge {
+  width: 38px !important;
+  min-width: 38px !important;
+  max-width: 38px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+}
+
+.cta-trust-signals--official .cta-provenexpert-review-seal {
+  width: 46px !important;
+  min-width: 46px !important;
+  max-width: 46px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+}
+
+@media (max-width: 640px) {
+  .cta-trust-signals--official { --official-seal-height: 30px; gap: 4px !important; }
+
+  .cta-trust-signals--official .google-review-button {
+    width: 96px !important;
+    min-width: 96px !important;
+    max-width: 96px !important;
+  }
+
+  .cta-trust-signals--official .cta-provenexpert-official-badge {
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+
+  .cta-trust-signals--official .cta-provenexpert-review-seal {
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+}
+
+/* Keep external Google and ProvenExpert marks compact on every CTA. */
+.cta-trust-signals--official > .google-review-button {
+  flex: 0 0 106px !important;
+  width: 106px !important;
+  min-width: 0 !important;
+  max-width: 106px !important;
+  height: 34px !important;
+  min-height: 0 !important;
+  max-height: 34px !important;
+}
+
+.cta-trust-signals--official > .cta-provenexpert-official-badge {
+  flex: 0 0 34px !important;
+  width: 34px !important;
+  min-width: 0 !important;
+  max-width: 34px !important;
+  height: 34px !important;
+  min-height: 0 !important;
+  max-height: 34px !important;
+  overflow: hidden !important;
+}
+
+.cta-trust-signals--official > .cta-provenexpert-review-seal {
+  flex: 0 0 42px !important;
+  width: 42px !important;
+  min-width: 0 !important;
+  max-width: 42px !important;
+  height: 34px !important;
+  min-height: 0 !important;
+  max-height: 34px !important;
+  overflow: hidden !important;
+}
+
+.cta-trust-signals--official > a > img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+}
+
+@media (max-width: 640px) {
+  .cta-trust-signals--official > .google-review-button {
+    flex-basis: 90px !important;
+    width: 90px !important;
+    max-width: 90px !important;
+    height: 28px !important;
+    max-height: 28px !important;
+  }
+
+  .cta-trust-signals--official > .cta-provenexpert-official-badge {
+    flex-basis: 28px !important;
+    width: 28px !important;
+    max-width: 28px !important;
+    height: 28px !important;
+    max-height: 28px !important;
+  }
+
+  .cta-trust-signals--official > .cta-provenexpert-review-seal {
+    flex-basis: 36px !important;
+    width: 36px !important;
+    max-width: 36px !important;
+    height: 28px !important;
+    max-height: 28px !important;
+  }
+}
+
+/* Final lock: third-party badge images must never set the CTA layout size. */
+.cta-trust-signals > * {
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.cta-trust-signals > a,
+.cta-trust-signals img,
+.cta-trust-signals svg,
+.cta-trust-signals iframe {
+  display: block !important;
+  max-width: 100% !important;
+  max-height: 40px !important;
+  object-fit: contain !important;
+}
+
+.cta-trust-signals > .google-review-button {
+  display: inline-flex !important;
+  width: 128px !important;
+  min-width: 128px !important;
+  max-width: 128px !important;
+  height: 40px !important;
+  min-height: 0 !important;
+  max-height: 40px !important;
+  padding: 6px 10px !important;
+  line-height: 1 !important;
+}
+
+.cta-trust-signals > .cta-provenexpert-official-badge,
+.cta-trust-signals > .cta-provenexpert-award {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  height: 40px !important;
+  min-height: 0 !important;
+  max-height: 40px !important;
+}
+
+.cta-trust-signals > .cta-provenexpert-review-seal {
+  width: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  height: 40px !important;
+  min-height: 0 !important;
+  max-height: 40px !important;
+}
+
+.cta-trust-signals > a > img {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.cta-trust-signals .google-rating-mark {
+  width: 24px !important;
+  height: 24px !important;
+  font-size: 1.55rem !important;
+}
+
+.cta-trust-signals .google-rating-copy strong {
+  font-size: 0.72rem !important;
+}
+
+.cta-trust-signals .google-rating-copy span {
+  font-size: 0.64rem !important;
+}
+
+.cta-trust-signals .google-rating-copy i {
+  font-size: 0.58rem !important;
 }

@@ -133,10 +133,10 @@
         }
       ],
       [
-        "Die vier Bereiche, die über deine finanzielle Zukunft entscheiden",
+        "Die fünf Bereiche, die über deine finanzielle Zukunft entscheiden",
         {
           variant: "mask",
-          html: 'Die vier Bereiche, die über deine <span class="title-accent title-neutral title-wipe">finanzielle Zukunft</span> entscheiden'
+          html: 'Die fünf Bereiche, die über deine <span class="title-accent title-neutral title-wipe">finanzielle Zukunft</span> entscheiden'
         }
       ],
       [
@@ -1051,9 +1051,6 @@
   const initCtaTrustSignals = () => {
     const googleReviewUrl = "https://www.google.com/search?sca_esv=d3caeb1c7ee2fe72&sxsrf=APpeQntG4bvHBeHpn_8wjr--iLrekEF3Ow:1783502486710&q=TrustPlan+Finanzkonzepte+Rezensionen&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_063R5fz_pcASmtWEHIdpiaSfcM192M0TLqE7zl8o7d3tzkHORbM1gDWHCwkmUI0fpfohoU%3D&uds=AJ5uw195omnGJ76DOhPThDoE1qc-TyXd6lywgsi6Vb_e4SkCA7IdnO1z1lFGWMvnApg1ueYqSzrmG7tlu2X8tsATW0WiBTuCm3t05FpUq-0bWUEDDY4g5RD6YL__OtQOf-z7awpuQqtB5q7vzalq4VGApnEAzEMNvw&sa=X&ved=2ahUKEwidlLTB4MKVAxXAX_EDHVl-AykQ3PALegQILxAF&biw=1440&bih=778&dpr=2";
     const provenProfileUrl = "https://www.provenexpert.com/trustplan-finanzkonzepte/?utm_source=Badge&utm_medium=Badge&utm_campaign=Badge";
-    const provenSealUrl = "https://www.provenexpert.com/profile/de-de/awards-2026/recommendation.svg";
-    const proSealProfileUrl = "https://www.provenexpert.com/trustplan-finanzkonzepte/?utm_source=seals&utm_campaign=embedded-proseal&utm_medium=profile&utm_content=0ada0ea9-c05b-4b7b-ae3f-1996b676e2fc";
-    const proSealWidgetId = "0ada0ea9-c05b-4b7b-ae3f-1996b676e2fc";
     const ctas = Array.from(document.querySelectorAll('a.btn[href="./kontakt.html"]')).filter(
       (cta) => !cta.classList.contains("nav-cta") && !cta.closest(".contact-google-reviews")
     );
@@ -1061,9 +1058,14 @@
 
     if (!ctas.length && !funnelSubmitButtons.length) return;
 
-    let hasOfficialBadge = false;
     const googleRatingMarkup = () =>
       '<span class="google-rating-mark" aria-hidden="true">G</span><span class="google-rating-copy"><strong>Google</strong><span>5,0 <i aria-hidden="true">★★★★★</i></span></span>';
+
+    const provenAwardMarkup = (variant, label) =>
+      `<a class="cta-provenexpert-award cta-provenexpert-award--${variant}" href="${provenProfileUrl}" target="_blank" rel="noopener noreferrer" aria-label="ProvenExpert-Auszeichnung ${label} von TrustPlan Finanzkonzepte ansehen"><img src="https://www.provenexpert.com/profile/de-de/awards-2026/${variant}.svg" width="300" height="300" alt="ProvenExpert-Auszeichnung ${label} für TrustPlan Finanzkonzepte" loading="lazy"></a>`;
+
+    const provenReviewSealMarkup = () =>
+      '<a class="cta-provenexpert-review-seal" href="https://www.provenexpert.com/trustplan-finanzkonzepte/?utm_source=Widget&amp;utm_medium=Widget&amp;utm_campaign=Widget" target="_blank" rel="noopener noreferrer" aria-label="ProvenExpert Kundenbewertungen von TrustPlan Finanzkonzepte ansehen"><img src="https://images.provenexpert.com/33/cd/4de9e94d826434cceee4d31c27dc/widget_landscape_300_de_0.png" width="300" height="250" alt="Erfahrungen und Bewertungen zu TrustPlan Finanzkonzepte" loading="lazy"></a>';
 
     const addTrustSignals = (cta, isFunnelSubmit = false) => {
       let proof = cta.previousElementSibling;
@@ -1085,31 +1087,15 @@
         }
       }
 
-      if (!proof.querySelector(".cta-provenexpert-seal")) {
-        const isOfficialBadge = !hasOfficialBadge;
-        hasOfficialBadge = true;
-        const provenBadge = document.createElement("a");
-        provenBadge.className = "cta-provenexpert-seal";
-        provenBadge.href = provenProfileUrl;
-        provenBadge.target = "_blank";
-        provenBadge.rel = "noopener noreferrer";
-        provenBadge.setAttribute("aria-label", "ProvenExpert Empfehlungen für TrustPlan Finanzkonzepte ansehen");
-        provenBadge.innerHTML = `<img src="${provenSealUrl}" alt="ProvenExpert Empfehlungssiegel für TrustPlan Finanzkonzepte" loading="lazy" decoding="async">`;
-
-        if (isOfficialBadge) {
-          provenBadge.id = "pe_badge_dtbrfwxc";
-          provenBadge.classList.add("cta-provenexpert-seal-official");
-        }
-
-        proof.append(provenBadge);
+      if (!proof.querySelector(".cta-provenexpert-award")) {
+        proof.insertAdjacentHTML(
+          "beforeend",
+          `${provenAwardMarkup("topservice", "Top Dienstleister")}${provenAwardMarkup("toprecommendation", "Top Empfehlung")}`
+        );
       }
 
-      if (!proof.querySelector(".cta-proseal-widget")) {
-        const proSeal = document.createElement("div");
-        proSeal.className = "cta-proseal-widget";
-        proSeal.dataset.prosealWidget = "true";
-        proSeal.innerHTML = `<a class="cta-proseal-fallback" href="${proSealProfileUrl}" target="_blank" rel="noopener noreferrer" aria-label="ProvenExpert Bewertungen für TrustPlan Finanzkonzepte ansehen"><span aria-hidden="true">✓</span><strong>Proven</strong><em>Expert</em></a><noscript><a href="${proSealProfileUrl}" target="_blank" rel="noopener noreferrer" title="Kundenbewertungen für TrustPlan Finanzkonzepte">Mehr erfahren</a></noscript>`;
-        proof.append(proSeal);
+      if (!proof.querySelector(".cta-provenexpert-review-seal")) {
+        proof.insertAdjacentHTML("beforeend", provenReviewSealMarkup());
       }
 
       if (!isFunnelSubmit && !cta.parentElement.classList.contains("cta-conversion-group")) {
@@ -1129,48 +1115,11 @@
       .forEach((submit) => addTrustSignals(submit, true));
 
     document.querySelectorAll(".cta-trust-signals").forEach((proof) => {
-      if (proof.querySelector(".cta-proseal-widget")) return;
-      const proSeal = document.createElement("div");
-      proSeal.className = "cta-proseal-widget";
-      proSeal.dataset.prosealWidget = "true";
-      proSeal.innerHTML = `<a class="cta-proseal-fallback" href="${proSealProfileUrl}" target="_blank" rel="noopener noreferrer" aria-label="ProvenExpert Bewertungen für TrustPlan Finanzkonzepte ansehen"><span aria-hidden="true">✓</span><strong>Proven</strong><em>Expert</em></a><noscript><a href="${proSealProfileUrl}" target="_blank" rel="noopener noreferrer" title="Kundenbewertungen für TrustPlan Finanzkonzepte">Mehr erfahren</a></noscript>`;
-      proof.append(proSeal);
+      if (!proof.querySelector(".cta-provenexpert-review-seal")) {
+        proof.insertAdjacentHTML("beforeend", provenReviewSealMarkup());
+      }
     });
 
-    const renderProSeals = () => {
-      if (!window.provenExpert?.proSeal) return;
-
-      document.querySelectorAll("[data-proseal-widget]").forEach((widget, index) => {
-        if (widget.dataset.prosealLoaded === "true") return;
-        widget.id = `proSealWidget-${index + 1}`;
-        window.provenExpert.proSeal({
-          widgetId: proSealWidgetId,
-          language: "de-DE",
-          usePageLanguage: false,
-          bannerColor: "#444444",
-          textColor: "#FFFFFF",
-          showBackPage: true,
-          showReviews: true,
-          hideDate: true,
-          hideName: false,
-          googleStars: true,
-          displayReviewerLastName: false,
-          embeddedSelector: `#${widget.id}`
-        });
-        widget.dataset.prosealLoaded = "true";
-      });
-    };
-
-    if (window.provenExpert?.proSeal) {
-      renderProSeals();
-    } else if (!document.getElementById("proseal-widget-script")) {
-      const proSealScript = document.createElement("script");
-      proSealScript.id = "proseal-widget-script";
-      proSealScript.src = "https://s.provenexpert.net/seals/proseal-v2.js";
-      proSealScript.async = true;
-      proSealScript.addEventListener("load", renderProSeals, { once: true });
-      document.head.append(proSealScript);
-    }
   };
 
   const initImageFallbacks = () => {
