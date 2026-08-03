@@ -9289,7 +9289,7 @@ select:focus {
 .cta-trust-signals iframe {
   display: block !important;
   max-width: 100% !important;
-  max-height: 52px !important;
+  max-height: 44px !important;
   object-fit: contain !important;
 }
 
@@ -9298,36 +9298,37 @@ select:focus {
   width: 128px !important;
   min-width: 128px !important;
   max-width: 128px !important;
-  height: 40px !important;
+  height: 44px !important;
   min-height: 0 !important;
-  max-height: 40px !important;
+  max-height: 44px !important;
   padding: 6px 10px !important;
   line-height: 1 !important;
 }
 
 .cta-trust-signals > .cta-provenexpert-official-badge,
 .cta-trust-signals > .cta-provenexpert-award {
-  width: 52px !important;
-  min-width: 52px !important;
-  max-width: 52px !important;
-  height: 52px !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  height: 44px !important;
   min-height: 0 !important;
-  max-height: 52px !important;
+  max-height: 44px !important;
 }
 
 .cta-trust-signals > .cta-provenexpert-review-seal {
-  width: 62px !important;
-  min-width: 62px !important;
-  max-width: 62px !important;
-  height: 52px !important;
+  width: 68px !important;
+  min-width: 68px !important;
+  max-width: 68px !important;
+  height: 44px !important;
   min-height: 0 !important;
-  max-height: 52px !important;
+  max-height: 44px !important;
   border-radius: 4px !important;
 }
 
 .cta-trust-signals > a > img {
   width: 100% !important;
-  height: 100% !important;
+  height: auto !important;
+  max-height: 100% !important;
 }
 
 .cta-trust-signals .google-rating-mark {
@@ -9346,4 +9347,29 @@ select:focus {
 
 .cta-trust-signals .google-rating-copy i {
   font-size: 0.58rem !important;
+}
+
+/* Funnel/contact trust marks: keep third-party badge artwork fully visible. */
+.cta-trust-signals--official.funnel-trust-signals {
+  height: auto !important;
+  min-height: 44px !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.funnel-trust-signals > * {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.funnel-trust-signals > a > img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
 }
