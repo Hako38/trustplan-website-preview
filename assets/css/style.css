@@ -3106,10 +3106,15 @@ ul {
   }
 
   .real-estate-section .card-grid.three::before {
-    background-position: center 20px;
-    background-size: min(98vw, 470px) auto;
-    opacity: 0.34;
+    background-position: center 48%;
+    background-size: auto 82%;
+    opacity: 0.18;
     transform: none;
+  }
+
+  .real-estate-section .solid-card {
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.86));
   }
 
   .real-estate-visual {
