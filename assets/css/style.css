@@ -3481,6 +3481,18 @@ ul {
   border-radius: inherit;
 }
 
+@media (min-width: 769px) {
+  .final-cta-media {
+    width: min(100%, 620px);
+    min-height: 0;
+    aspect-ratio: 1600 / 849;
+  }
+
+  .final-cta-media img {
+    min-height: 0;
+  }
+}
+
 .review-marquee {
   position: relative;
   overflow: hidden;
@@ -4604,6 +4616,33 @@ details p {
   border-radius: var(--radius);
 }
 
+@media (min-width: 769px) {
+  .founder-copy .trust-points {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .founder-copy .trust-points span {
+    white-space: nowrap;
+    padding: 9px 11px;
+    font-size: 0.92rem;
+  }
+
+  .founder-copy .cta-conversion-group {
+    align-items: flex-start;
+    margin-inline: 0;
+  }
+
+  .founder-copy .cta-conversion-group > .btn {
+    align-self: flex-start;
+  }
+
+  .founder-copy .cta-trust-signals {
+    justify-content: flex-start;
+    margin-inline: 0;
+  }
+}
+
 .founder-note {
   margin-top: 20px;
   padding-left: 16px;
@@ -4823,6 +4862,20 @@ details p {
   color: rgba(255, 255, 255, 0.74);
   font-size: clamp(1.05rem, 1.4vw, 1.28rem);
   line-height: 1.7;
+}
+
+.contact-funnel-people {
+  width: min(100%, 620px);
+  margin-top: clamp(18px, 3vw, 34px);
+  margin-bottom: clamp(-18px, -1.5vw, -8px);
+  pointer-events: none;
+}
+
+.contact-funnel-people img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 24px 42px rgba(2, 8, 18, 0.28));
 }
 
 .contact-trust-list {
@@ -7480,6 +7533,19 @@ select:focus {
   .contact-page .contact-funnel-copy p:not(.eyebrow) {
     font-size: 1rem;
     line-height: 1.6;
+  }
+
+  .contact-page .contact-funnel-people {
+    height: 118px;
+    width: calc(100% + 20px);
+    margin: 10px -10px -6px;
+    overflow: hidden;
+  }
+
+  .contact-page .contact-funnel-people img {
+    width: 112%;
+    max-width: none;
+    transform: translate(-5%, -34px);
   }
 
   .contact-page .contact-trust-list {
