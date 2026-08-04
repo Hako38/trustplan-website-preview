@@ -132,6 +132,9 @@ h3 {
 .title-anim {
   opacity: 0;
   transform: translateY(34px) scale(0.975);
+  overflow: visible;
+  padding-top: 20px;
+  padding-bottom: 20px;
   transition:
     opacity 1850ms ease,
     transform 2100ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -4864,18 +4867,44 @@ details p {
   line-height: 1.7;
 }
 
+.contact-proof-block {
+  width: min(100%, 650px);
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  margin-top: clamp(20px, 3vw, 30px);
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+}
+
 .contact-funnel-people {
-  width: min(100%, 620px);
-  margin-top: clamp(18px, 3vw, 34px);
-  margin-bottom: clamp(-18px, -1.5vw, -8px);
+  width: 128px;
+  height: 132px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(5, 17, 34, 0.5);
   pointer-events: none;
 }
 
 .contact-funnel-people img {
   display: block;
-  width: 100%;
+  width: 126px;
+  max-width: 100%;
   height: auto;
-  filter: drop-shadow(0 24px 42px rgba(2, 8, 18, 0.28));
+}
+
+.contact-proof-block .cta-trust-signals {
+  width: 100%;
+  margin-top: 0;
+  margin-inline: 0;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
 }
 
 .contact-trust-list {
@@ -4901,6 +4930,12 @@ details p {
 .funnel-trust-signals {
   justify-content: flex-start;
   margin: 22px 0 0;
+}
+
+.funnel-section .section-heading .funnel-trust-signals {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  justify-content: flex-start !important;
 }
 
 .contact-google-heading {
@@ -5353,6 +5388,48 @@ details p {
 .footer-note p {
   color: rgba(255, 255, 255, 0.58);
   font-size: 0.86rem;
+}
+
+.footer-note .footer-credit {
+  margin-top: 14px;
+  text-align: right;
+}
+
+.footer-credit a {
+  position: relative;
+  display: inline-block;
+  color: #d49a5c;
+  font-weight: 850;
+  text-decoration: none;
+  background: linear-gradient(100deg, #9f5a2a 0%, #e8b06f 42%, #fff0bf 50%, #b87333 62%, #f0c27a 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: novauxGlow 3.2s ease-in-out infinite;
+}
+
+.footer-credit a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(159, 90, 42, 0.45), rgba(255, 224, 168, 0.9), rgba(184, 115, 51, 0.5));
+}
+
+@keyframes novauxGlow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 0 rgba(232, 176, 111, 0));
+  }
+
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 8px rgba(232, 176, 111, 0.45));
+  }
 }
 
 .modal {
@@ -7535,17 +7612,58 @@ select:focus {
     line-height: 1.6;
   }
 
+  .contact-page .contact-proof-block {
+    width: 100%;
+    grid-template-columns: 94px minmax(0, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+    padding: 10px;
+    border-radius: 18px;
+  }
+
   .contact-page .contact-funnel-people {
-    height: 118px;
-    width: calc(100% + 20px);
-    margin: 10px -10px -28px;
+    width: 94px;
+    height: 98px;
+    margin: 0;
+    padding: 0;
+    border-radius: 14px;
     overflow: hidden;
   }
 
   .contact-page .contact-funnel-people img {
-    width: 112%;
-    max-width: none;
-    transform: translate(-5%, -34px);
+    width: 96px;
+    max-width: 100%;
+    transform: none;
+  }
+
+  .contact-page .contact-proof-block .cta-trust-signals {
+    --trust-mark-height: 46px;
+    gap: 6px;
+    width: 100% !important;
+    min-width: 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .contact-page .contact-proof-block .google-review-button {
+    min-width: 148px;
+    min-height: 46px;
+    padding: 6px 9px;
+    border-radius: 13px;
+  }
+
+  .contact-page .contact-proof-block .google-rating-mark {
+    width: 22px;
+    height: 22px;
+    font-size: 1.1rem;
+  }
+
+  .contact-page .contact-proof-block .google-rating-copy strong {
+    font-size: 0.82rem;
+  }
+
+  .contact-page .contact-proof-block .google-rating-copy span {
+    font-size: 0.76rem;
   }
 
   .contact-page .contact-trust-list {
@@ -9519,4 +9637,151 @@ select:focus {
   max-height: 100% !important;
   object-fit: contain !important;
   object-position: center !important;
+}
+
+/* Equal trust-mark height everywhere while preserving each mark's natural width. */
+.cta-trust-signals {
+  --trust-mark-height: 60px;
+}
+
+.cta-trust-signals > .google-review-button,
+.funnel-trust-signals > .google-review-button {
+  height: var(--trust-mark-height) !important;
+  max-height: var(--trust-mark-height) !important;
+}
+
+.cta-trust-signals > .cta-provenexpert-official-badge,
+.cta-trust-signals > .cta-provenexpert-award,
+.cta-trust-signals > .cta-provenexpert-review-seal,
+.funnel-trust-signals > .cta-provenexpert-official-badge,
+.funnel-trust-signals > .cta-provenexpert-award,
+.funnel-trust-signals > .cta-provenexpert-review-seal {
+  height: var(--trust-mark-height) !important;
+  max-height: var(--trust-mark-height) !important;
+}
+
+.cta-trust-signals > a > img,
+.funnel-trust-signals > a > img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* Match the CTA button to the natural seal-row length, not the other way around. */
+.cta-conversion-group {
+  flex: 0 1 auto !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+}
+
+.cta-conversion-group > .cta-trust-signals {
+  width: fit-content !important;
+  max-width: 100% !important;
+  justify-content: center !important;
+}
+
+.cta-conversion-group > .btn {
+  width: 100% !important;
+  max-width: 100% !important;
+  align-self: stretch !important;
+}
+
+@media (min-width: 1024px) {
+  .process-section .section-heading h2,
+  .process-section .section-heading p,
+  .final-cta p {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
+
+.contact-proof-block {
+  grid-template-columns: 96px minmax(0, 1fr) !important;
+  gap: 8px !important;
+  padding: 10px !important;
+}
+
+.contact-proof-block .contact-funnel-people {
+  width: 96px !important;
+  height: 104px !important;
+}
+
+.contact-proof-block .contact-funnel-people img {
+  width: 100px !important;
+}
+
+.contact-proof-block .cta-trust-signals {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  gap: 2px !important;
+  flex-wrap: nowrap !important;
+}
+
+@media (max-width: 768px) {
+  .contact-proof-block {
+    grid-template-columns: 64px minmax(0, 1fr) !important;
+    gap: 6px !important;
+    padding: 8px !important;
+  }
+
+  .contact-proof-block .contact-funnel-people {
+    width: 64px !important;
+    height: 86px !important;
+    justify-self: start;
+  }
+
+  .contact-proof-block .contact-funnel-people img {
+    width: 74px !important;
+  }
+
+  .contact-proof-block .cta-trust-signals {
+    --trust-mark-height: 46px;
+    display: flex !important;
+    gap: 2px !important;
+    align-items: center;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .contact-proof-block .google-review-button {
+    width: 120px !important;
+    min-width: 120px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    padding: 6px 8px !important;
+    justify-content: center;
+  }
+
+  .contact-proof-block .google-rating-mark {
+    font-size: 24px !important;
+  }
+
+  .contact-proof-block .google-rating-copy strong {
+    font-size: 14px !important;
+  }
+
+  .contact-proof-block .google-rating-copy span {
+    font-size: 11px !important;
+  }
+
+  .contact-proof-block .cta-provenexpert-official-badge,
+  .contact-proof-block .cta-provenexpert-review-seal {
+    width: auto !important;
+    min-width: 0 !important;
+    height: 46px !important;
+    max-height: 46px !important;
+  }
+
+  .contact-proof-block .cta-provenexpert-official-badge {
+    inline-size: 42px !important;
+    min-inline-size: 42px !important;
+    max-inline-size: 42px !important;
+  }
+
+  .contact-proof-block .cta-provenexpert-review-seal {
+    inline-size: 56px !important;
+    min-inline-size: 56px !important;
+    max-inline-size: 56px !important;
+  }
 }

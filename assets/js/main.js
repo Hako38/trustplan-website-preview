@@ -112,9 +112,17 @@
       );
     }
 
+    const pageHeadings = new Map([
+      [
+        "Kostenfreies Erstgespräch buchen",
+        '<span class="title-word">Kostenfreies</span> <span class="title-word">Erstgespräch</span><br><span class="title-word">buchen</span>'
+      ]
+    ]);
+
     main.querySelectorAll("h1").forEach((heading) => {
       if (heading.classList.contains("title-anim")) return;
-      setAnimatedHTML(heading, splitWords(heading.textContent), "page");
+      const customHeading = pageHeadings.get(normalize(heading.textContent));
+      setAnimatedHTML(heading, customHeading || splitWords(heading.textContent), "page");
     });
 
     const strongHeadings = new Map([
@@ -122,56 +130,56 @@
         "Wo dein Geld heute verloren geht",
         {
           variant: "blur",
-          html: 'Wo dein Geld heute <span class="title-accent title-neutral title-wipe">verloren</span> geht'
+          html: 'Wo dein Geld heute<br><span class="title-accent title-neutral title-wipe">verloren</span> geht'
         }
       ],
       [
         "Warum die meisten Menschen ohne Plan durchs Leben gehen",
         {
           variant: "words",
-          html: '<span class="title-word">Warum</span> <span class="title-word">die</span> <span class="title-word">meisten</span> <span class="title-word">Menschen</span> <span class="title-word title-accent title-neutral title-type">ohne Plan</span> <span class="title-word">durchs</span> <span class="title-word">Leben</span> <span class="title-word">gehen</span>'
+          html: '<span class="title-word">Warum</span> <span class="title-word">die</span> <span class="title-word">meisten</span> <span class="title-word">Menschen</span><br><span class="title-word title-accent title-neutral title-type">ohne Plan</span> <span class="title-word">durchs</span> <span class="title-word">Leben</span> <span class="title-word">gehen</span>'
         }
       ],
       [
         "Die fünf Bereiche, die über deine finanzielle Zukunft entscheiden",
         {
           variant: "mask",
-          html: 'Die fünf Bereiche, die über deine <span class="title-accent title-neutral title-wipe">finanzielle Zukunft</span> entscheiden'
+          html: 'Die fünf Bereiche,<br>die über deine <span class="title-accent title-neutral title-wipe">finanzielle Zukunft</span> entscheiden'
         }
       ],
       [
         "Was TrustPlan vom Markt unterscheidet",
         {
           variant: "depth",
-          html: 'Was <span class="title-accent title-copper">TrustPlan</span> vom Markt unterscheidet'
+          html: 'Was <span class="title-accent title-copper">TrustPlan</span><br>vom Markt unterscheidet'
         }
       ],
       [
         "Für wen TrustPlan besonders sinnvoll ist",
         {
           variant: "words",
-          html: '<span class="title-word">Für</span> <span class="title-word">wen</span> <span class="title-word">TrustPlan</span> <span class="title-word title-accent title-neutral title-wipe">besonders sinnvoll</span> <span class="title-word">ist</span>'
+          html: '<span class="title-word">Für</span> <span class="title-word">wen</span> <span class="title-word">TrustPlan</span><br><span class="title-word title-accent title-neutral title-wipe">besonders sinnvoll</span> <span class="title-word">ist</span>'
         }
       ],
       [
         "Kostenlose Finanz-Tools für deine erste Orientierung",
         {
           variant: "glass",
-          html: 'Kostenlose Finanz-Tools für deine erste <span class="title-accent title-copper title-wipe">Orientierung</span>'
+          html: 'Kostenlose Finanz-Tools<br>für deine erste <span class="title-accent title-copper title-wipe">Orientierung</span>'
         }
       ],
       [
         "Ergebnisse echter Mandanten",
         {
           variant: "fade",
-          html: 'Ergebnisse <span class="title-accent title-neutral title-wipe">echter Mandanten</span>'
+          html: 'Ergebnisse<br><span class="title-accent title-neutral title-wipe">echter Mandanten</span>'
         }
       ],
       [
         "Wenn die Struktur steht, beginnt der nächste Schritt",
         {
           variant: "words",
-          html: '<span class="title-word">Wenn</span> <span class="title-word">die</span> <span class="title-word title-accent title-copper">Struktur</span> <span class="title-word">steht,</span> <span class="title-word">beginnt</span> <span class="title-word">der</span> <span class="title-word title-accent title-neutral title-wipe">nächste Schritt</span>'
+          html: '<span class="title-word">Wenn</span> <span class="title-word">die</span> <span class="title-word title-accent title-copper">Struktur</span> <span class="title-word">steht,</span><br><span class="title-word">beginnt</span> <span class="title-word">der</span> <span class="title-word title-accent title-neutral title-wipe">nächste Schritt</span>'
         }
       ],
       [
@@ -192,7 +200,7 @@
         "Kostenlose Potenzialanalyse starten",
         {
           variant: "growth",
-          html: 'Kostenlose <span class="title-accent title-neutral title-wipe">Potenzialanalyse</span> starten'
+          html: 'Kostenlose <span class="title-accent title-neutral title-wipe">Potenzialanalyse</span><br>starten'
         }
       ],
       [
@@ -206,7 +214,7 @@
         "Warte nicht, bis du jahrelang Potenzial verschenkst",
         {
           variant: "final",
-          html: '<span class="title-word">Warte</span> <span class="title-word">nicht,</span> <span class="title-word">bis</span> <span class="title-word">du</span> <span class="title-word">jahrelang</span> <span class="title-word title-accent title-neutral">Potenzial</span> <span class="title-word title-accent title-neutral">verschenkst</span>'
+          html: '<span class="title-word">Warte</span> <span class="title-word">nicht,</span> <span class="title-word">bis</span> <span class="title-word">du</span> <span class="title-word">jahrelang</span><br><span class="title-word title-accent title-neutral">Potenzial</span> <span class="title-word title-accent title-neutral">verschenkst</span>'
         }
       ]
     ]);
