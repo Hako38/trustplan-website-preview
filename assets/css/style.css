@@ -2815,7 +2815,7 @@ ul {
   isolation: isolate;
   max-width: 1120px;
   margin: 0 auto;
-  padding: clamp(220px, 30vw, 330px) clamp(14px, 2.6vw, 24px) clamp(14px, 2.6vw, 24px);
+  padding: clamp(110px, 16vw, 180px) clamp(14px, 2.6vw, 24px) clamp(14px, 2.6vw, 24px);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.78);
   border-radius: 28px;
@@ -3101,7 +3101,7 @@ ul {
   }
 
   .real-estate-section .card-grid.three {
-    padding: 260px 14px 14px;
+    padding: 90px 14px 14px;
     border-radius: 24px;
   }
 
