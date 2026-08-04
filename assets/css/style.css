@@ -7538,7 +7538,7 @@ select:focus {
   .contact-page .contact-funnel-people {
     height: 118px;
     width: calc(100% + 20px);
-    margin: 10px -10px -6px;
+    margin: 10px -10px -28px;
     overflow: hidden;
   }
 
