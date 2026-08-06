@@ -8086,6 +8086,11 @@ select:focus {
 }
 
 @media (max-width: 640px) {
+  .process-section .section-heading p {
+    max-width: 34ch;
+    text-wrap: balance;
+  }
+
   .process-journey {
     margin-top: 34px;
     padding-left: 34px;

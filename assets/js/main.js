@@ -929,7 +929,13 @@
       } else if (tablet) {
         path = `M ${points[0].x} ${points[0].y} C ${points[0].x + 48} ${points[0].y - 18}, ${points[1].x - 48} ${points[1].y - 18}, ${points[1].x} ${points[1].y} C ${points[1].x + 18} ${points[1].y + 68}, ${points[2].x + 18} ${points[2].y - 68}, ${points[2].x} ${points[2].y} C ${points[2].x + 48} ${points[2].y + 18}, ${points[3].x - 48} ${points[3].y + 18}, ${points[3].x} ${points[3].y}`;
       } else {
-        path = `M ${points[0].x} ${points[0].y} C ${points[0].x + 42} ${points[0].y - 20}, ${points[1].x - 42} ${points[1].y - 20}, ${points[1].x} ${points[1].y} C ${points[1].x + 42} ${points[1].y + 20}, ${points[2].x - 42} ${points[2].y + 20}, ${points[2].x} ${points[2].y} C ${points[2].x + 42} ${points[2].y - 20}, ${points[3].x - 42} ${points[3].y - 20}, ${points[3].x} ${points[3].y}`;
+        path = cardRects.slice(0, -1).map((rect, index) => {
+          const next = cardRects[index + 1];
+          const y = ((rect.top + rect.height / 2) + (next.top + next.height / 2)) / 2 - journeyRect.top;
+          const startX = rect.right - journeyRect.left + 2;
+          const endX = next.left - journeyRect.left - 2;
+          return `M ${startX} ${y} L ${endX} ${y}`;
+        }).join(" ");
       }
 
       route.setAttribute("viewBox", `0 0 ${width} ${height}`);
