@@ -137,7 +137,7 @@
         "Warum die meisten Menschen ohne Plan durchs Leben gehen",
         {
           variant: "words",
-          html: '<span class="title-word">Warum</span> <span class="title-word">die</span> <span class="title-word">meisten</span> <span class="title-word">Menschen</span><br><span class="title-word title-accent title-neutral title-type">ohne Plan</span> <span class="title-word">durchs</span> <span class="title-word">Leben</span> <span class="title-word">gehen</span>'
+          html: '<span class="title-word">Warum</span> <span class="title-word">die</span> <br class="title-break-mobile"><span class="title-word">meisten</span> <span class="title-word">Menschen</span> <br class="title-break-mobile"><span class="title-word title-accent title-neutral title-type">ohne Plan</span> <span class="title-word">durchs</span> <span class="title-word">Leben</span> <span class="title-word">gehen</span>'
         }
       ],
       [
@@ -165,7 +165,7 @@
         "Kostenlose Finanz-Tools für deine erste Orientierung",
         {
           variant: "glass",
-          html: 'Kostenlose Finanz-Tools<br>für deine erste <span class="title-accent title-copper title-wipe">Orientierung</span>'
+          html: 'Kostenlose <br class="title-break-mobile">Finanz-Tools für deine erste <span class="title-accent title-copper title-wipe">Orientierung</span>'
         }
       ],
       [
@@ -179,7 +179,7 @@
         "Wenn die Struktur steht, beginnt der nächste Schritt",
         {
           variant: "words",
-          html: '<span class="title-word">Wenn</span> <span class="title-word">die</span> <span class="title-word title-accent title-copper">Struktur</span> <span class="title-word">steht,</span><br><span class="title-word">beginnt</span> <span class="title-word">der</span> <span class="title-word title-accent title-neutral title-wipe">nächste Schritt</span>'
+          html: '<span class="title-word">Wenn</span> <span class="title-word">die</span> <br class="title-break-mobile"><span class="title-word title-accent title-copper">Struktur</span> <span class="title-word">steht,</span> <br class="title-break-mobile"><span class="title-word">beginnt</span> <span class="title-word">der</span> <span class="title-word title-accent title-neutral title-wipe">nächste Schritt</span>'
         }
       ],
       [

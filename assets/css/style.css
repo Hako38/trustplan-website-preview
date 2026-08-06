@@ -5727,6 +5727,16 @@ details p {
   }
 }
 
+.title-break-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .title-break-mobile {
+    display: block;
+  }
+}
+
 @media (max-width: 768px) {
   .section {
     padding: 78px 0;
@@ -9718,21 +9728,60 @@ select:focus {
   flex-wrap: nowrap !important;
 }
 
+/* Contact proof: portrait first, awards directly beneath it. */
+.contact-proof-block {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px !important;
+  width: min(100%, 430px) !important;
+  position: relative;
+  padding: 0 !important;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.contact-proof-block .contact-funnel-people {
+  width: 252px !important;
+  height: auto !important;
+  aspect-ratio: 1225 / 1284;
+  display: block;
+  overflow: visible;
+  border-radius: 0;
+  background: transparent;
+}
+
+.contact-proof-block .contact-funnel-people img {
+  display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.contact-proof-block .cta-trust-signals {
+  width: fit-content !important;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  justify-content: center !important;
+}
+
 @media (max-width: 768px) {
   .contact-proof-block {
-    grid-template-columns: 64px minmax(0, 1fr) !important;
     gap: 6px !important;
-    padding: 8px !important;
+    padding: 0 !important;
   }
 
   .contact-proof-block .contact-funnel-people {
-    width: 64px !important;
-    height: 86px !important;
-    justify-self: start;
+    width: 187px !important;
+    height: auto !important;
   }
 
   .contact-proof-block .contact-funnel-people img {
-    width: 74px !important;
+    width: 100% !important;
   }
 
   .contact-proof-block .cta-trust-signals {
@@ -9740,7 +9789,8 @@ select:focus {
     display: flex !important;
     gap: 2px !important;
     align-items: center;
-    justify-content: flex-start !important;
+    bottom: -8px;
+    justify-content: center !important;
     flex-wrap: nowrap !important;
   }
 
